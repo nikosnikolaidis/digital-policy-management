@@ -35,6 +35,11 @@ public class UserController {
         return userService.createUser(user);
     }
 
+    @GetMapping("/unverified")
+    List<User> getUnverifiedUsers(){
+        return userService.getUnverifiedUsers();
+    }
+
     @GetMapping("/all")
     List<User> getAllUser(){
         return userService.getAllUsers();

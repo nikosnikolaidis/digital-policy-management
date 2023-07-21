@@ -22,13 +22,18 @@ public class UserService {
 
     public User createUser(User user) {
         Optional<User> userOptional = userRepository.findByEmail(user.getEmail());
-        if(!userOptional.isPresent()){
+        if (!userOptional.isPresent()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setRoles("SIMPLE");
             user.setVerified(false);
             userRepository.save(user);
+            return user;
         }
         throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Email is used from another user");
+    }
+
+    public List<User> getUnverifiedUsers(){
+        return userRepository.findByVerifiedFalse();
     }
 
     public List<User> getAllUsers() {
