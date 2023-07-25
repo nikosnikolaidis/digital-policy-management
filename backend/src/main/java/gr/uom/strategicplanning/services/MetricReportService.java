@@ -8,7 +8,6 @@ import gr.uom.strategicplanning.models.MetricReport;
 import gr.uom.strategicplanning.repositories.IndicatorReportRepository;
 import gr.uom.strategicplanning.repositories.MetricReportRepository;
 import gr.uom.strategicplanning.repositories.MetricRepository;
-import gr.uom.strategicplanning.services.equation.PostFixCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -97,10 +96,5 @@ public class MetricReportService {
             e.printStackTrace();
         }
         return 0.0;
-
-
-        //calculate
-//        PostFixCalculator postFixCalculator = new PostFixCalculator(i.getEquation());
-//        return postFixCalculator.getResult();
     }
 }
