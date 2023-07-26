@@ -1,0 +1,25 @@
+version: "3.3"
+
+services:
+  backend-strategic:
+    build:
+      context: ./backend/.
+    container_name: backend-strategic
+    depends_on:
+      - db-strategic
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-strategic:5432/test_db
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=30a301d7257
+    ports:
+      - '8085:8080'
+
+  db-strategic:
+    image: postgres:14.7
+    container_name: db-strategic
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 30a301d7257
+      POSTGRES_DB: test_db
+    ports:
+      - '5455:5432'
