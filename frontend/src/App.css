@@ -1,3 +1,102 @@
+@media screen and (min-width: 1024px){
+  .navbar{
+      min-height: 10vh !important;
+  }
+  
+  .navbar-brand a{
+    padding: 0px !important;
+  }
+  
+  .navbar-item img {
+    max-height: 70px !important;
+  }
+
+  .navbar-menu{
+    margin-left: 20px !important;
+  }
+}
+
+.logInContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+}
+
+.formlog,.formreg{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 29px;
+  background-color: #000b5f6b;
+}
+
+.logInForm, .RegisterForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 29px;
+  padding: 1rem 4rem;
+}
+
+.createAcc, .loginAcc{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem; 
+  margin-top: 5rem;
+}
+
+.logInForm input {
+  text-align: center;
+  padding-bottom: 2px;
+  background:transparent;
+  border:none;
+  border-bottom: 1px solid white;
+  outline: none;
+  color: white;
+}
+
+button{
+  background: rgb(255 255 255 / .15);
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 10px;
+  height: 2rem;
+  /* max-width: max-content;
+  min-width: min-content; */
+  transition-duration: 0.5s;
+  color: white;
+  /* font-weight:bolder; */
+  width: auto;
+}
+
+button:hover{
+  background-color: rgba(255,255,255, .35);;
+}
+
+.log{
+  font-size: large;
+  font-weight: 500;
+}
+
+.appContainer{
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
 .App {
   text-align: center;
 }
