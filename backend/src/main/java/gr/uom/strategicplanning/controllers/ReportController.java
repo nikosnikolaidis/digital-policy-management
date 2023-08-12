@@ -1,11 +1,10 @@
 package gr.uom.strategicplanning.controllers;
 
-import gr.uom.strategicplanning.controllers.entities.MetricUpdateReport;
-import gr.uom.strategicplanning.models.IndicatorReport;
+import gr.uom.strategicplanning.controllers.entities.IndicatorUpdateReport;
 import gr.uom.strategicplanning.models.MetricReport;
-import gr.uom.strategicplanning.services.IndicatorReportService;
-import gr.uom.strategicplanning.services.IndicatorService;
+import gr.uom.strategicplanning.models.IndicatorReport;
 import gr.uom.strategicplanning.services.MetricReportService;
+import gr.uom.strategicplanning.services.IndicatorReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,30 +22,30 @@ public class ReportController {
 
 
 
-    @PostMapping("/metric")
-    MetricReport createMetricReport(@RequestBody MetricUpdateReport metricUpdateReport){
-        return metricReportService.createMetricReport(metricUpdateReport);
+    @PostMapping("/indicator")
+    IndicatorReport createIndicatorReport(@RequestBody IndicatorUpdateReport indicatorUpdateReport){
+        return indicatorReportService.createIndicatorReport(indicatorUpdateReport);
     }
-
-    @GetMapping("/metric")
-    List<MetricReport> getAllMetricReportsByMetricName(@RequestParam String metricName){
-        return metricReportService.getAllMetricReportsByMetricName(metricName);
-    }
-
-    @GetMapping("/metric/all")
-    List<MetricReport> getAllMetricReports(){
-        return metricReportService.getAllMetricReports();
-    }
-
 
     @GetMapping("/indicator")
-    List<IndicatorReport> getAllIndicatorReportsByIndicatorName(@RequestParam String indicatorName){
+    List<IndicatorReport> getAllIndicatorReportsByName(@RequestParam String indicatorName){
         return indicatorReportService.getAllIndicatorReportsByIndicatorName(indicatorName);
     }
 
     @GetMapping("/indicator/all")
     List<IndicatorReport> getAllIndicatorReports(){
         return indicatorReportService.getAllIndicatorReports();
+    }
+
+
+    @GetMapping("/metric")
+    List<MetricReport> getAllMetricReportsByName(@RequestParam String metricName){
+        return metricReportService.getAllMetricReportsByName(metricName);
+    }
+
+    @GetMapping("/metric/all")
+    List<MetricReport> getAllMetricReports(){
+        return metricReportService.getAllMetricReports();
     }
 
 }

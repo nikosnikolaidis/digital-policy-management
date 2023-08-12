@@ -11,6 +11,6 @@ import java.util.List;
 public interface IndicatorReportRepository extends JpaRepository<IndicatorReport, Long> {
     List<IndicatorReport> findAllByDate(Date date);
     List<IndicatorReport> findAllByDateBetween(Date dateStart, Date dateEnd);
-    List<IndicatorReport> findAllByIndicatorIndicatorName(String indicatorName);
-    IndicatorReport findTopByIndicatorIndicatorName(String indicatorName);
+    List<IndicatorReport> findAllByIndicatorName(String name);
+    IndicatorReport findTopByIndicatorSymbol(String metricSymbol);
 }

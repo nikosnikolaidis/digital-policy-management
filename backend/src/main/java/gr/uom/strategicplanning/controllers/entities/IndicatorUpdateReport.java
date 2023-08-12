@@ -4,17 +4,17 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
-public class MetricUpdateReport {
+public class IndicatorUpdateReport {
     @JsonFormat(
             shape = JsonFormat.Shape.STRING,
             pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private Date date;
-    private String metricName;
+    private String name;
     private Double value;
 
-    public MetricUpdateReport(Date date, String metricName, Double value) {
+    public IndicatorUpdateReport(Date date, String metricName, Double value) {
         this.date = date;
-        this.metricName = metricName;
+        this.name = metricName;
         this.value = value;
     }
 
@@ -26,12 +26,12 @@ public class MetricUpdateReport {
         this.date = date;
     }
 
-    public String getMetricName() {
-        return metricName;
+    public String getName() {
+        return name;
     }
 
-    public void setMetricName(String metricName) {
-        this.metricName = metricName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Double getValue() {

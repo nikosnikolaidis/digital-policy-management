@@ -2,11 +2,15 @@ package gr.uom.strategicplanning.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 @Entity
 public class MetricReport {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -21,9 +25,9 @@ public class MetricReport {
     public MetricReport() {
     }
 
-    public MetricReport(Date date, Metric metric, Double value) {
+    public MetricReport(Date date, Metric Metric, Double value) {
         this.date = date;
-        this.metric = metric;
+        this.metric = Metric;
         this.value = value;
     }
 
@@ -47,8 +51,8 @@ public class MetricReport {
         return metric;
     }
 
-    public void setMetric(Metric metric) {
-        this.metric = metric;
+    public void setMetric(Metric Metric) {
+        this.metric = Metric;
     }
 
     public Double getValue() {

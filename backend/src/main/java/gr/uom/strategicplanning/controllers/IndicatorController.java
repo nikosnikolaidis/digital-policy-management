@@ -1,6 +1,5 @@
 package gr.uom.strategicplanning.controllers;
 
-import gr.uom.strategicplanning.controllers.entities.IndicatorCreation;
 import gr.uom.strategicplanning.models.Indicator;
 import gr.uom.strategicplanning.services.IndicatorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +20,21 @@ public class IndicatorController {
     }
 
     @GetMapping
-    Indicator getIndicator(@RequestParam String name){
-        return indicatorService.getIndicatorWithName(name);
+    Indicator getIndicator(@RequestParam(required = false) String name, @RequestParam(required = false) String symbol){
+        if(name!=null){
+            return indicatorService.getIndicatorWithName(name);
+        }
+        if(symbol!=null){
+            return indicatorService.getIndicatorWithSymbol(symbol);
+        }
+        return null;
     }
 
     @PostMapping
-    Indicator createIndicator(@RequestBody IndicatorCreation indicatorCreation){
-        return indicatorService.createIndicator(indicatorCreation);
+    Indicator createIndicator(@RequestBody Indicator indicator){
+        System.out.println(indicator.getName());
+        System.out.println(indicator.getSymbol());
+        return indicatorService.createIndicator(indicator);
     }
+
 }

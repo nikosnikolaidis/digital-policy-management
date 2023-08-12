@@ -2,15 +2,11 @@ package gr.uom.strategicplanning.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class IndicatorReport {
-
     @Id
     @GeneratedValue
     private Long id;

@@ -1,5 +1,6 @@
 package gr.uom.strategicplanning.controllers;
 
+import gr.uom.strategicplanning.controllers.entities.MetricCreation;
 import gr.uom.strategicplanning.models.Metric;
 import gr.uom.strategicplanning.services.MetricService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,27 +13,20 @@ import java.util.List;
 public class MetricController {
 
     @Autowired
-    MetricService metricService;
+    MetricService MetricService;
 
     @GetMapping("/all")
-    List<Metric> getAllMetrics(){
-        return metricService.getAllMetrics();
+    List<Metric> getAllMertics(){
+        return MetricService.getAllMetrics();
     }
 
     @GetMapping
-    Metric getMetric(@RequestParam(required = false) String name,@RequestParam(required = false) String symbol){
-        if(name!=null){
-            return metricService.getMetricWithName(name);
-        }
-        if(symbol!=null){
-            return metricService.getMetricWithSymbol(symbol);
-        }
-        return null;
+    Metric getMetric(@RequestParam String name){
+        return MetricService.getMetricWithName(name);
     }
 
     @PostMapping
-    Metric createMetric(@RequestBody Metric metric){
-        return metricService.createMetric(metric);
+    Metric createMetric(@RequestBody MetricCreation metricCreation){
+        return MetricService.createMetric(metricCreation);
     }
-
 }

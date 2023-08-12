@@ -1,13 +1,16 @@
 package gr.uom.strategicplanning.services;
 
-import gr.uom.strategicplanning.models.Indicator;
+import gr.uom.strategicplanning.controllers.entities.MetricCreation;
 import gr.uom.strategicplanning.models.Metric;
+import gr.uom.strategicplanning.models.Indicator;
 import gr.uom.strategicplanning.repositories.MetricRepository;
+import gr.uom.strategicplanning.repositories.IndicatorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,36 +19,41 @@ import java.util.Optional;
 public class MetricService {
 
     @Autowired
-    MetricRepository metricRepository;
+    MetricRepository MetricRepository;
+    @Autowired
+    IndicatorRepository indicatorRepository;
 
     public List<Metric> getAllMetrics(){
-        return metricRepository.findAll();
+        return MetricRepository.findAll();
     }
 
     public Metric getMetricWithName(String name){
-        Metric metric = metricRepository.findByMetricName(name)
+        Metric Metric = MetricRepository.findByName(name)
                 .orElseThrow(() -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Metric with name "+name+" doesn't exist");
                 });
-        return metric;
+        return Metric;
     }
 
-    public Metric getMetricWithSymbol(String symbol){
-        Metric metric = metricRepository.findByMetricSymbol(symbol)
-                .orElseThrow(() -> {
-                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Metric with symbol "+symbol+" doesn't exist");
-                });
-        return metric;
-    }
+    @Transactional
+    public Metric createMetric(MetricCreation metricCreation){
+        Optional<Metric> metricOptional = MetricRepository.findByName(metricCreation.getName());
+        if(!metricOptional.isPresent()){
+            Metric metric = new Metric(metricCreation.getName(), metricCreation.getEquation());
+            MetricRepository.save(metric);
 
-    public Metric createMetric(Metric metric){
-        Optional<Metric> metricOptional1 = metricRepository.findByMetricName(metric.getMetricName());
-        Optional<Metric> metricOptional2 = metricRepository.findByMetricSymbol(metric.getMetricSymbol());
-        if(!metricOptional1.isPresent() && !metricOptional2.isPresent()){
-            metric.setIndicatorList(new ArrayList<>());
-            metricRepository.save(metric);
+            List<Indicator> indicatorList =new ArrayList<>();
+            for(String m: metricCreation.getIndicatorList()){
+                Optional<Indicator> indicatorOptional = indicatorRepository.findByName(m);
+                if(indicatorOptional.isPresent()){
+                    indicatorOptional.get().addMetric(metric);
+                    indicatorList.add(indicatorOptional.get());
+                }
+            }
+            metric.setIndicatorList(indicatorList);
             return metric;
         }
-        throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Name or Symbol is used from another metric");
+        throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Name is used from another metric");
     }
+
 }

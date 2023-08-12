@@ -1,11 +1,6 @@
 package gr.uom.strategicplanning.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -13,22 +8,20 @@ public class Metric {
     @Id
     @GeneratedValue
     private Long id;
-    private String metricName;
-    private String metricSymbol;
-    @ManyToMany(mappedBy = "metricList")
-    @JsonIgnore
+    private String name;
+    private String equation;
+    @ManyToMany
+    @JoinTable(name="metric_indicator",
+            joinColumns = @JoinColumn(name="metric_name"),
+            inverseJoinColumns = @JoinColumn(name="indicator_name"))
     private List<Indicator> indicatorList;
 
     public Metric() {
     }
 
-    public Metric(String metricName, String metricSymbol) {
-        this.metricName = metricName;
-        this.metricSymbol = metricSymbol;
-    }
-
-    public void addIndicator(Indicator indicator){
-        this.indicatorList.add(indicator);
+    public Metric(String name, String equation) {
+        this.name = name;
+        this.equation = equation;
     }
 
     public Long getId() {
@@ -39,20 +32,20 @@ public class Metric {
         this.id = id;
     }
 
-    public String getMetricName() {
-        return metricName;
+    public String getName() {
+        return name;
     }
 
-    public void setMetricName(String metricName) {
-        this.metricName = metricName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getMetricSymbol() {
-        return metricSymbol;
+    public String getEquation() {
+        return equation;
     }
 
-    public void setMetricSymbol(String metricSymbol) {
-        this.metricSymbol = metricSymbol;
+    public void setEquation(String equation) {
+        this.equation = equation;
     }
 
     public List<Indicator> getIndicatorList() {
