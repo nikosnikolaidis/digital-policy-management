@@ -1,5 +1,6 @@
 
 /* Style for the container of each individual graph */
+
 .graph-container {
     border: 1px solid #ccc;
     padding: 20px;
@@ -23,4 +24,17 @@
     justify-content: center;
   }
   
-  /* Add more custom styles as needed */
+  /* .multi-graph-container.collapsed {
+    max-height: 50px; 
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+  
+  .collapse-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 10px;
+  } */

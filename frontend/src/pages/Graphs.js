@@ -1,7 +1,6 @@
-import logo from "../logo.svg";
-import "../App.css";
 import MultiGraphComponent from "./MultiGraphComponent";
 
+//example values
 const tables = [
   {
     data: [

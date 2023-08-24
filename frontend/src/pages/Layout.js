@@ -88,6 +88,9 @@ const Layout = () => {
             <Link to="/graphs" class="navbar-item">
               Graphs
             </Link>
+            <Link to="/metrics" class="navbar-item">
+              Metrics
+            </Link>
           </div>
 
           <div class="navbar-end">

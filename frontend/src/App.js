@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import isAuthenticated from "./scripts/Tokens";
 import Graphs from "./pages/Graphs";
+import Metrics from "./pages/Metrics";
 
 function App() {
   const [valid, setvalid] = useState();
@@ -36,6 +37,7 @@ function App() {
             )}
             <Route path="register" element={<Register />} />
             <Route path="graphs" element={<Graphs />} />
+            <Route path="metrics" element={<Metrics />} />
             <Route path="login" element={<Login />} />
             <Route path="*" element={<NoPage />} />
           </Route>
