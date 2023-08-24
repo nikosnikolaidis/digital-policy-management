@@ -1,0 +1,26 @@
+
+/* Style for the container of each individual graph */
+.graph-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border-radius: 8px;
+  }
+  
+  /* Style for the title of each graph */
+  .graph-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  /* Style for the entire MultiGraphComponent container */
+  .multi-graph-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* Add more custom styles as needed */
