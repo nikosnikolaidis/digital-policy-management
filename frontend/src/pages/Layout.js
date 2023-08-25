@@ -56,7 +56,7 @@ const Layout = () => {
         <div id="navbar-menu" class="navbar-menu">
           <div class="navbar-start">
             <Link to="/" class="navbar-item">
-              Home
+              Κεντρική
             </Link>
             {valid && (
               <>
@@ -86,10 +86,13 @@ const Layout = () => {
               </>
             )}
             <Link to="/graphs" class="navbar-item">
-              Graphs
+              Παρακολούθηση Δεικτών
+            </Link>
+            <Link to="/graphs" class="navbar-item">
+              Ταμπλό Δεικτών
             </Link>
             <Link to="/metrics" class="navbar-item">
-              Metrics
+              Διαχείριση Δεικτών
             </Link>
           </div>
 
