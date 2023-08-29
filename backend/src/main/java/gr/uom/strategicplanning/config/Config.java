@@ -3,6 +3,7 @@ package gr.uom.strategicplanning.config;
 import gr.uom.strategicplanning.models.User;
 import gr.uom.strategicplanning.models.euproject.Project;
 import gr.uom.strategicplanning.repositories.UserRepository;
+import gr.uom.strategicplanning.repositories.euproject.OrganizationRepository;
 import gr.uom.strategicplanning.repositories.euproject.ProjectRepository;
 import gr.uom.strategicplanning.services.UserPrivilegedService;
 import gr.uom.strategicplanning.services.UserService;
@@ -20,6 +21,7 @@ public class Config {
     @Bean
     CommandLineRunner commandLineRunner(UserRepository userRepository, UserService userService,
                                         UserPrivilegedService userPrivilegedService, OrganizationService organizationService,
+                                        OrganizationRepository organizationRepository,
                                         ProjectService projectService, ProjectRepository projectRepository){
         return args -> {
             //Create admin user
@@ -29,18 +31,19 @@ public class Config {
                 userService.createUser(admin);
                 userPrivilegedService.verifyUser("admin@uom.gr");
                 userPrivilegedService.givePrivilegeToUser("admin@uom.gr");
-
             }
 
-            //Get all eu projects and organization
-            projectService.addProjects();
-            System.out.println("--- EU projects added");
+//            projectRepository.deleteAll();
+//            organizationRepository.deleteAll();
+            if(projectRepository.count() == 0) {
+                //Get all eu projects and organization
+                projectService.addProjects();
+                System.out.println("--- EU projects added");
+                organizationService.addOrganizations();
+                System.out.println("--- EU Organizations and connections with projects added");
+            }
 
-            organizationService.addOrganizations();
-            System.out.println("--- EU Organizations and connections with projects added");
-
-
-            organizationService.getOrganizationWithName("UNIVERSITY OF MACEDONIA");
+            System.out.println(organizationService.getOrganizationWithName("UNIVERSITY OF MACEDONIA"));;
         };
     }
 }

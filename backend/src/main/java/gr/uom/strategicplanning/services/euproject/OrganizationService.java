@@ -1,5 +1,6 @@
 package gr.uom.strategicplanning.services.euproject;
 
+import gr.uom.strategicplanning.controllers.entities.ProjectSlim;
 import gr.uom.strategicplanning.models.euproject.Organization;
 import gr.uom.strategicplanning.models.euproject.Project;
 import gr.uom.strategicplanning.repositories.euproject.OrganizationRepository;
@@ -17,8 +18,7 @@ import javax.transaction.Transactional;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class OrganizationService {
@@ -103,5 +103,89 @@ public class OrganizationService {
             }
 
         }
+    }
+
+    @Transactional
+    public List<ProjectSlim> getProjectsCoordinatedByOrg(String orgId) {
+        Organization organization = organizationRepository.findById(Long.parseLong(orgId))
+                .orElseThrow(() -> {
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Organization with id "+orgId+" doesn't exist");
+                });
+
+        List<ProjectSlim> coordinatingSlimProjects = new ArrayList<>();
+        for (Project pr:organization.getCoordinations()){
+            coordinatingSlimProjects.add(new ProjectSlim(pr.getId(),pr.getAcronym(),pr.getTitle(),pr.getStartDate(),pr.getEndDate(),
+                    pr.getObjective(),pr.getTotalCost(),pr.getProgramme(),pr.getTopics(),pr.getFrameworkProgramme(),pr.getCall(),
+                    pr.getFundingScheme()));
+        }
+
+        return coordinatingSlimProjects;
+    }
+
+    @Transactional
+    public List<ProjectSlim> getProjectsParticipatedOrg(String orgId) {
+        Organization organization = organizationRepository.findById(Long.parseLong(orgId))
+                .orElseThrow(() -> {
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Organization with id "+orgId+" doesn't exist");
+                });
+
+        List<ProjectSlim> coordinatingSlimProjects = new ArrayList<>();
+        for (Project pr:organization.getProjects()){
+            coordinatingSlimProjects.add(new ProjectSlim(pr.getId(),pr.getAcronym(),pr.getTitle(),pr.getStartDate(),pr.getEndDate(),
+                    pr.getObjective(),pr.getTotalCost(),pr.getProgramme(),pr.getTopics(),pr.getFrameworkProgramme(),pr.getCall(),
+                    pr.getFundingScheme()));
+        }
+
+        return coordinatingSlimProjects;
+    }
+
+    @Transactional
+    public HashMap<Organization, Integer> getTopPartners(String orgId) {
+        HashMap<Organization, Integer> partners = new HashMap<>();
+        Organization organization = organizationRepository.findById(Long.parseLong(orgId))
+                .orElseThrow(() -> {
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Organization with id "+orgId+" doesn't exist");
+                });
+
+        List<Project> projects = new ArrayList<>(organization.getProjects());
+        projects.addAll(organization.getCoordinations());
+
+        for (Project pr:projects){
+            List<Organization> organizations = new ArrayList<>(pr.getParticipants());
+            organizations.add(pr.getCoordinator());
+            organizations.remove(organization);
+
+            for(Organization org: organizations){
+                Integer i=partners.get(org);
+                partners.put(org, (i==null) ? 1 : i+1);
+            }
+        }
+
+        HashMap<Organization,Integer> sortedPartners = sortByValue(partners);
+        return sortedPartners;
+    }
+
+
+
+    /**
+     * Function to sort hashmap by values
+     * @param hm HashMap to be sorted by integer value
+     * @return sorted hashmap
+     */
+    public HashMap<Organization, Integer> sortByValue(HashMap<Organization, Integer> hm)
+    {
+        // Create a list from elements of HashMap
+        List<Map.Entry<Organization, Integer> > list = new LinkedList<>(hm.entrySet());
+
+        // Sort the list
+        list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+
+        // put data from sorted list to hashmap
+        HashMap<Organization, Integer> temp = new LinkedHashMap<>();
+        for (Map.Entry<Organization, Integer> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+
+        return temp;
     }
 }

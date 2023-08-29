@@ -1,12 +1,10 @@
 package gr.uom.strategicplanning.services.euproject;
 
-import gr.uom.strategicplanning.models.euproject.Organization;
 import gr.uom.strategicplanning.models.euproject.Project;
 import gr.uom.strategicplanning.repositories.euproject.OrganizationRepository;
 import gr.uom.strategicplanning.repositories.euproject.ProjectRepository;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -40,10 +38,10 @@ public class ProjectService {
     }
 
     @Transactional
-    public Project getProjectWithAcronym(String acronym){
-        Project project = projectRepository.findByAcronym(acronym)
+    public Project getProjectWithTitle(String title){
+        Project project = projectRepository.findByTitle(title)
                 .orElseThrow(() -> {
-                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Project with acronym "+acronym+" doesn't exist");
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Project with title "+title+" doesn't exist");
                 });
         return project;
     }
