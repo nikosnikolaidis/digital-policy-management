@@ -71,3 +71,15 @@
     border-radius: 4px;
   }
   
+  graph-container {
+    width: 80%; /* Set the initial width to 80% */
+    margin: 0 auto; /* Center the container horizontally */
+    display: flex;
+    justify-content: center; /* Center its children horizontally */
+  }
+  
+  .chart-wrapper {
+    max-width: 100%; /* Allow the chart to expand within the container */
+    width: 100%;
+    flex: 1; /* Allow the chart to grow and occupy remaining space */
+  }

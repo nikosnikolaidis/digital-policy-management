@@ -76,7 +76,7 @@ const Metrics = () => {
         { time: "2023-08-16", value: 1 },
         { time: "2023-09-22", value: 2 },
         { time: "2023-10-13", value: 4 },
-        { time: "2023-11-07", value: 1.7 },
+        { time: "2023-11-07", value: 17 },
       ],
     },
     {
