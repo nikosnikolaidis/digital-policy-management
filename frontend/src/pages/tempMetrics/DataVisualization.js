@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./css/DataVisualization.css"; // Import the CSS file with your custom styles
-import MetricGraph from "./MetricGraph";
+import MetricsGraph from "./MetricsGraph";
 
 const DataVisualization = ({ data, onDataAdd }) => {
   const [selectedPair, setSelectedPair] = useState(null);
@@ -32,7 +32,7 @@ const DataVisualization = ({ data, onDataAdd }) => {
             <span className="key">{pair.key}:</span>
             <span className="value">{pair.value}</span>
           </div>
-          {selectedPair === pair && <MetricGraph graphData={pair.graphData} />}
+          {selectedPair === pair && <MetricsGraph graphData={pair.graphData} />}
         </div>
       ))}
 

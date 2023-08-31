@@ -9,7 +9,7 @@ import {
   Legend,
 } from "recharts";
 
-const MetricGraph = ({ graphData }) => {
+const MetricsGraph = ({ graphData }) => {
   return (
     <div className="graph-container">
       <div className="chart-wrapper">
@@ -36,4 +36,4 @@ const MetricGraph = ({ graphData }) => {
   );
 };
 
-export default MetricGraph;
+export default MetricsGraph;
