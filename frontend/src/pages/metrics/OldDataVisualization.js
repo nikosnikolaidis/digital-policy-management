@@ -8,7 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import "../DataVisualization.css"; // Import the CSS file with your custom styles
+import "../css/DataVisualization.css"; // Import the CSS file with your custom styles
 import MetricGraph from "./MetricGraph";
 
 const OldDataVisualization = ({ data, onDataAdd }) => {

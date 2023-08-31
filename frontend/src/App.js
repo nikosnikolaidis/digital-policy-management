@@ -11,8 +11,8 @@ import NoPage from "./pages/NoPage";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import isAuthenticated from "./scripts/Tokens";
-import Graphs from "./pages/Graphs";
-import Metrics from "./pages/Metrics";
+import Graphs from "./pages/metrics/Graphs";
+import Metrics from "./pages/metrics/Metrics";
 
 function App() {
   const [valid, setvalid] = useState();

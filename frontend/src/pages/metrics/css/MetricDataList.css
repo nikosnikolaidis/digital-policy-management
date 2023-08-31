@@ -1,0 +1,51 @@
+/* GraphDataList.css */
+
+/* Style for the list container */
+ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Style for each list item */
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Style for buttons */
+  button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Style for the "Add New Item" section */
+  h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  input {
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Style for the "Add New" button */
+  #add-new-button {
+    background-color: #27ae60;
+  }
+  
+  #add-new-button:hover {
+    background-color: #219653;
+  }

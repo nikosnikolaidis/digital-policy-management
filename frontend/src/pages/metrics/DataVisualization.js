@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../DataVisualization.css"; // Import the CSS file with your custom styles
+import "./css/DataVisualization.css"; // Import the CSS file with your custom styles
 import MetricGraph from "./MetricGraph";
 
 const DataVisualization = ({ data, onDataAdd }) => {

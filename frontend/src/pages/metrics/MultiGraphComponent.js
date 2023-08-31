@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-import "../MultiGraphComponent.css"; // Import the CSS file with your custom styles
+import "./css/MultiGraphComponent.css"; // Import the CSS file with your custom styles
 import {
   LineChart,
   Line,
