@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import "./css/PairListWithTabs.css";
 import MetricsGraph from "./MetricsGraph";
-// import MetricDataList from "./MetricDataList";
+import MetricsDataList from "./MetricsDataList";
 
 const PairListWithTabs = ({ data }) => {
   const [selectedPair, setSelectedPair] = useState(null);
@@ -44,7 +45,7 @@ const PairListWithTabs = ({ data }) => {
               {selectedTab === "Graph" ? (
                 <MetricsGraph graphData={pair.graphData} />
               ) : (
-                <MetricDataList graphData={pair.graphData} />
+                <MetricsDataList graphData={pair.graphData} />
               )}
             </div>
           )}

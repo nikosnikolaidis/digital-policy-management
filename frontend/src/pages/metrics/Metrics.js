@@ -1,51 +1,6 @@
-import DataVisualization from "./DataVisualization";
+// import DataVisualization from "./DataVisualization";
 import { useState } from "react";
-
-//example values
-const data = [
-  {
-    key: "metric aaa",
-    value: "23",
-    graphData: [
-      { time: "2023-01-01", value: 10 },
-      { time: "2023-02-01", value: 15 },
-      { time: "2023-03-01", value: 20 },
-      { time: "2023-06-01", value: 10 },
-      { time: "2023-11-01", value: 30 },
-      // ... more data entries
-    ],
-  },
-  {
-    key: "metric bbb",
-    value: "122",
-    graphData: [
-      { time: "2023-01-01", value: 5 },
-      { time: "2023-02-01", value: 2 },
-      { time: "2023-03-01", value: 3 },
-      { time: "2023-06-01", value: 1 },
-      { time: "2023-07-01", value: 0.4 },
-      { time: "2023-07-02", value: 1 },
-      { time: "2023-07-15", value: 1.2 },
-      { time: "2023-08-02", value: 0.8 },
-      { time: "2023-08-16", value: 1 },
-      { time: "2023-09-22", value: 2 },
-      { time: "2023-10-13", value: 4 },
-      { time: "2023-11-07", value: 1.7 },
-    ],
-  },
-  {
-    key: "metric ccc",
-    value: "54",
-    graphData: [
-      { time: "2023-01-01", value: 2 },
-      { time: "2023-02-01", value: 3 },
-      { time: "2023-03-01", value: 2 },
-      { time: "2023-06-01", value: 5 },
-      { time: "2023-11-01", value: 7 },
-    ],
-  },
-  // ... more key-value pairs
-];
+import PairListWithTabs from "./PairListWithTabs";
 
 const Metrics = () => {
   const [data, setData] = useState([
@@ -99,7 +54,7 @@ const Metrics = () => {
   return (
     <div>
       <h1>Data Visualization Example</h1>
-      <DataVisualization data={data} onDataAdd={handleDataAdd} />
+      <PairListWithTabs data={data} onDataAdd={handleDataAdd} />
     </div>
   );
 };

@@ -1,19 +1,13 @@
 import React, { useState } from "react";
-import "../css/MetricDataList.css"; // Import the CSS file with your custom styles
+import "./css/MetricsDataList.css";
 
-const MetricDataList = () => {
-  const initialData = [
-    { time: "2023-01-01", value: 5 },
-    { time: "2023-02-01", value: 2 },
-    // ... rest of the data ...
-  ];
-
-  const [metricData, setMetricData] = useState(initialData);
+const MetricsDataList = ({ graphData }) => {
+  const [metricData, setMetricData] = useState(graphData);
   const [newTime, setNewTime] = useState("");
   const [newValue, setNewValue] = useState("");
 
   const handleModify = (index) => {
-    // Implement modify functionality here
+    // TODO Implement modify functionality
   };
 
   const handleDelete = (index) => {
@@ -60,4 +54,4 @@ const MetricDataList = () => {
   );
 };
 
-export default MetricDataList;
+export default MetricsDataList;

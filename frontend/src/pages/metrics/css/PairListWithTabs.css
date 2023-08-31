@@ -1,0 +1,46 @@
+/* PairListWithTabs.css */
+
+.pair-container {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+  }
+  
+  .pair {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .key {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .value {
+    flex-grow: 1;
+  }
+  
+  .tab {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #ddd;
+    cursor: pointer;
+  }
+  
+  .tab.active {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .content {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+  }
+  
+  /* Additional styles for MetricGraph and GraphDataList components */
+  /* ... */
+  
+  /* Styling for buttons inside MetricGraph and GraphDataList */
+  /* ... */
