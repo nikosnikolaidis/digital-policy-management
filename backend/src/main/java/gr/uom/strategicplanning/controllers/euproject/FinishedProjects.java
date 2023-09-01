@@ -6,10 +6,12 @@ import gr.uom.strategicplanning.models.euproject.Project;
 import gr.uom.strategicplanning.services.euproject.OrganizationService;
 import gr.uom.strategicplanning.services.euproject.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/euproject/finished/")
@@ -36,16 +38,24 @@ public class FinishedProjects {
         return organizationService.getProjectsParticipatedOrg(orgId);
     }
 
-    @GetMapping("/organization/toppartners")
+    @GetMapping("/organization/topPartners")
     HashMap<Organization,Integer> getTopPartners(@RequestParam String orgId){
         return organizationService.getTopPartners(orgId);
     }
 
 
 
+
     @GetMapping("/project")
     Project getProject(@RequestParam String title){
         return projectService.getProjectWithTitle(title);
+    }
+
+    @GetMapping("/project/all")
+    ResponseEntity<Map<String, Object>> getAllProjects(@RequestParam(required = false) String contain,
+                                                       @RequestParam(defaultValue = "0") int page,
+                                                       @RequestParam(defaultValue = "100") int size){
+        return projectService.getAllProjects(contain,page,size);
     }
 
 }

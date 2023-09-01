@@ -8,7 +8,11 @@ import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,10 +23,7 @@ import java.io.Reader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ProjectService {
@@ -33,17 +34,35 @@ public class ProjectService {
     OrganizationRepository organizationRepository;
 
     @Transactional
-    public List<Project> getAllProjects(){
-        return projectRepository.findAll();
-    }
-
-    @Transactional
     public Project getProjectWithTitle(String title){
         Project project = projectRepository.findByTitle(title)
                 .orElseThrow(() -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Project with title "+title+" doesn't exist");
                 });
         return project;
+    }
+
+    @Transactional
+    public ResponseEntity<Map<String, Object>> getAllProjects(String contain, int page, int size){
+        Pageable paging = PageRequest.of(page, size);
+        Page<Project> pageProject;
+        if(contain==null) {
+            pageProject = projectRepository.findAll(paging);
+        }
+        else {
+            pageProject = projectRepository.findByTitleContainingIgnoreCase(contain, paging);
+            if(pageProject.getContent().isEmpty()) {
+                pageProject = projectRepository.findByObjectiveContainingIgnoreCase(contain, paging);
+            }
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        List<Project> projects = pageProject.getContent();
+        response.put("solutions", projects);
+        response.put("currentPage", pageProject.getNumber());
+        response.put("totalItems", pageProject.getTotalElements());
+        response.put("totalPages", pageProject.getTotalPages());
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Transactional
