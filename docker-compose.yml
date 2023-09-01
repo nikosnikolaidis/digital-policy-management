@@ -21,5 +21,12 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: 30a301d7257
       POSTGRES_DB: test_db
+    volumes:
+       - strategic_postgresql:/var/lib/postgresql
+       - strategic_postgresql_data:/var/lib/postgresql/data
     ports:
       - '5455:5432'
+
+volumes:
+  strategic_postgresql:
+  strategic_postgresql_data:

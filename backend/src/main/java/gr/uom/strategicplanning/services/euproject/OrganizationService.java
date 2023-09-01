@@ -46,10 +46,8 @@ public class OrganizationService {
                 "endOfParticipation","ecContribution","country","street","city","postCode","organizationUrl","vatNumber",
                 "contactForm","contactType","contactTitle","contactFirstNames","contactLastNames","contactFunction",
                 "contactTelephoneNumber","contactFaxNumber" };
-        InputStream e= ProjectService.class.getResourceAsStream("/cordis-h2020organizations.csv");
-        Reader in = new InputStreamReader(e);
-//        Resource resource = new ClassPathResource("cordis-h2020organizations.csv");
-//        Reader in = new FileReader(resource.getFile());
+        InputStream stream= ProjectService.class.getResourceAsStream("/cordis-h2020organizations.csv");
+        Reader in = new InputStreamReader(stream);
 
         CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
                 .setDelimiter(";")
