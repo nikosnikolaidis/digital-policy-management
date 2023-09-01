@@ -48,3 +48,19 @@ ul {
   #add-new-button:hover {
     background-color: #219653;
   }
+
+  .interaction-box ul {
+    height: 200px;
+    padding: 0px;
+    margin: 0px;
+    text-align: left;
+    overflow: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  
+  .interaction-box li p{
+    text-align: left;
+    text-align: bottom;
+  }

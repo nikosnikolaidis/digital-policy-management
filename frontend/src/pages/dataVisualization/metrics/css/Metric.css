@@ -1,0 +1,61 @@
+
+.metric {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .metric-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  
+  .metric-title:hover::before {
+    content: attr(data-equation);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 50%;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .metric-title:hover::before {
+    opacity: 0.7;
+  }
+
+  
+  .tab-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .tab-buttons button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background-color: #3498db; /* Default button color */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .tab-buttons button.active {
+    background-color: #e74c3c; /* Active button color */
+  }
+  
+  .tab-content {
+    /* Add any additional styling for the tab content container if needed */
+  }

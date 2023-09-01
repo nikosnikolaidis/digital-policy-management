@@ -91,8 +91,11 @@ const Layout = () => {
             <Link to="/graphs" class="navbar-item">
               Ταμπλό Δεικτών
             </Link>
-            <Link to="/metrics" class="navbar-item">
+            <Link to="/indicators" class="navbar-item">
               Διαχείριση Δεικτών
+            </Link>
+            <Link to="/metrics" class="navbar-item">
+              Διαχείριση Μετρικών
             </Link>
           </div>
 

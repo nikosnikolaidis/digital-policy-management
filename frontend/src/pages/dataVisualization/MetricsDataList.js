@@ -23,12 +23,11 @@ const MetricsDataList = ({ graphData }) => {
   };
 
   return (
-    <div>
-      <h2>Metric Data List</h2>
+    <div class="interaction-box">
       <ul>
         {metricData.map((item, index) => (
           <li key={index}>
-            Time: {item.time}, Value: {item.value}
+            <p>Time:</p> {item.time}<p>, Value:</p> {item.value}
             <button onClick={() => handleModify(index)}>Modify</button>
             <button onClick={() => handleDelete(index)}>Delete</button>
           </li>

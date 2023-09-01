@@ -1,0 +1,43 @@
+.pair-container {
+    border: 1px solid #ccc;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .pair-container h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .pair {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .key {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
+  .tab {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+  }
+  
+  .tab.active {
+    background-color: #3498db;
+    color: white;
+    border: none;
+  }
+  
+  .content {
+    margin-top: 10px;
+  }
+  
+  /* Additional styles can be added as needed */

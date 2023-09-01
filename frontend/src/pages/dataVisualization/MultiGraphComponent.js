@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-import "./css/MultiGraphComponent.css"; // Import the CSS file with your custom styles
+import "./css/MultiGraphComponent.css";
 import {
   LineChart,
   Line,
@@ -13,17 +13,9 @@ import {
 } from "recharts";
 
 const MultiGraphComponent = ({ tables }) => {
-  const [collapsed, setCollapsed] = useState(false);
-
-  const toggleCollapse = () => {
-    setCollapsed(!collapsed);
-  };
 
   return (
-    <div className={`multi-graph-container ${collapsed ? "collapsed" : ""}`}>
-      <button className="collapse-button" onClick={toggleCollapse}>
-        {collapsed ? "Expand All" : "Collapse All"}
-      </button>
+    <div className={`multi-graph-container`}>
       {tables.map((table, index) => (
         <div key={index} className="graph-container">
           <h3 className="graph-title">Graph {index + 1}</h3>

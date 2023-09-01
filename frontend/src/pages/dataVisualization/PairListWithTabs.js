@@ -12,7 +12,6 @@ const PairListWithTabs = ({ data }) => {
       setSelectedPair(null); // Collapse if the same pair is clicked again
     } else {
       setSelectedPair(pair);
-      setSelectedTab("Graph"); // Reset selected tab to "Graph" when a new pair is clicked
     }
   };
 
@@ -24,9 +23,11 @@ const PairListWithTabs = ({ data }) => {
     <div>
       {data.map((pair, index) => (
         <div key={index} className="pair-container">
+          <div className="pair">
           <div className="pair" onClick={() => handlePairClick(pair)}>
             <span className="key">{pair.key}:</span>
             <span className="value">{pair.value}</span>
+          </div>
             <span
               className={`tab ${selectedTab === "Graph" ? "active" : ""}`}
               onClick={() => toggleTab("Graph")}
