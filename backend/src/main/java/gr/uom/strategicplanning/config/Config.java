@@ -43,6 +43,7 @@ public class Config {
                 System.out.println("--- EU Organizations and connections with projects added");
             }
 
+            System.out.println("--");
             System.out.println(organizationService.getOrganizationWithName("UNIVERSITY OF MACEDONIA"));;
         };
     }

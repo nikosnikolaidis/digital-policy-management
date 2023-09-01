@@ -15,9 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.util.*;
 
 @Service
@@ -48,8 +46,10 @@ public class OrganizationService {
                 "endOfParticipation","ecContribution","country","street","city","postCode","organizationUrl","vatNumber",
                 "contactForm","contactType","contactTitle","contactFirstNames","contactLastNames","contactFunction",
                 "contactTelephoneNumber","contactFaxNumber" };
-        Resource resource = new ClassPathResource("cordis-h2020organizations.csv");
-        Reader in = new FileReader(resource.getFile());
+        InputStream e= ProjectService.class.getResourceAsStream("/cordis-h2020organizations.csv");
+        Reader in = new InputStreamReader(e);
+//        Resource resource = new ClassPathResource("cordis-h2020organizations.csv");
+//        Reader in = new FileReader(resource.getFile());
 
         CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
                 .setDelimiter(";")

@@ -14,6 +14,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 @Service
 public class MetricService {
@@ -41,13 +42,14 @@ public class MetricService {
         if(!metricOptional.isPresent()){
             Metric metric = new Metric(metricCreation.getName(), metricCreation.getEquation());
             MetricRepository.save(metric);
-
-            List<Indicator> indicatorList =new ArrayList<>();
-            for(String m: metricCreation.getIndicatorList()){
-                Optional<Indicator> indicatorOptional = indicatorRepository.findByName(m);
-                if(indicatorOptional.isPresent()){
-                    indicatorOptional.get().addMetric(metric);
-                    indicatorList.add(indicatorOptional.get());
+            List<Indicator> indicatorList = new ArrayList<>();
+            for(String st: metricCreation.getEquation().split(" ")){
+                if(!isNumeric(st)) {
+                    Optional<Indicator> indicatorOptional = indicatorRepository.findBySymbol(st);
+                    if(indicatorOptional.isPresent()){
+                        indicatorOptional.get().addMetric(metric);
+                        indicatorList.add(indicatorOptional.get());
+                    }
                 }
             }
             metric.setIndicatorList(indicatorList);
@@ -56,4 +58,12 @@ public class MetricService {
         throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Name is used from another metric");
     }
 
+
+    private Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+    public boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        return pattern.matcher(strNum).matches();
+    }
 }

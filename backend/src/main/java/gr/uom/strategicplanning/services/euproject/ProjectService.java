@@ -17,9 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -71,8 +69,10 @@ public class ProjectService {
         String[] HEADERS = { "rcn","id","acronym","status","programme","topics","frameworkProgramme","title",
                 "startDate","endDate","projectUrl","objective","totalCost","ecMaxContribution","call","fundingScheme",
                 "coordinator","coordinatorCountry","participants","participantCountries","subjects" };
-        Resource resource = new ClassPathResource("cordis-h2020projects.csv");
-        Reader in = new FileReader(resource.getFile());
+        InputStream e= ProjectService.class.getResourceAsStream("/cordis-h2020projects.csv");
+        Reader in = new InputStreamReader(e);
+//        Resource resource = new ClassPathResource("cordis-h2020projects.csv");
+//        Reader in = new FileReader(resource.getFile());
 
         CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
                 .setDelimiter(";")
