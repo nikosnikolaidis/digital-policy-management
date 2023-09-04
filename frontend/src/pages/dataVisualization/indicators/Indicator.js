@@ -1,17 +1,16 @@
 import "./css/Indicator.css";
-import React, { useState } from 'react';
-import IndicatorGraph from './IndicatorGraph';
-import IndicatorData from './IndicatorData';
+import React, { useState } from "react";
+import IndicatorGraph from "./IndicatorGraph";
+import IndicatorData from "./IndicatorData";
 
 const Indicator = ({ jsonData }) => {
-    
   const [data, setData] = useState(jsonData);
-    const handleDeleteItem = (id) => {
-        const updatedData = data.filter((item) => item.id !== id);
-        setData(updatedData);
-      };
-    
-  const [activeTab, setActiveTab] = useState('Graph');
+  const handleDeleteItem = (id) => {
+    const updatedData = data.filter((item) => item.id !== id);
+    setData(updatedData);
+  };
+
+  const [activeTab, setActiveTab] = useState("Graph");
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -19,24 +18,24 @@ const Indicator = ({ jsonData }) => {
 
   return (
     <div className="Indicator">
-      <h1 className="indicator-name">{data[0].indicator.name}</h1>
+      {/* <h1 className="indicator-name">{data[0].indicator.name}</h1> */}
       <div className="tab-container">
         <button
-          className={`tab-button ${activeTab === 'Graph' ? 'active' : ''}`}
-          onClick={() => handleTabChange('Graph')}
+          className={`tab-button ${activeTab === "Graph" ? "active" : ""}`}
+          onClick={() => handleTabChange("Graph")}
         >
           Graph
         </button>
         <button
-          className={`tab-button ${activeTab === 'Data' ? 'active' : ''}`}
-          onClick={() => handleTabChange('Data')}
+          className={`tab-button ${activeTab === "Data" ? "active" : ""}`}
+          onClick={() => handleTabChange("Data")}
         >
           Data
         </button>
       </div>
       <div className="content">
-        {activeTab === 'Graph' && <IndicatorGraph data={data} />}
-        {activeTab === 'Data' && <IndicatorData data={data} />}
+        {activeTab === "Graph" && <IndicatorGraph data={data} />}
+        {activeTab === "Data" && <IndicatorData data={data} />}
       </div>
     </div>
   );

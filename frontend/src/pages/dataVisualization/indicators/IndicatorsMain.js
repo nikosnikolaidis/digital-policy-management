@@ -1,50 +1,82 @@
 import React, { useState } from "react";
 import Indicator from "./Indicator"; // Import the Indicator component
+import "./css/IndicatorsMain.css";
 
-const IndicatorsMain = () => {
-  // Initialize state with an empty array
-  const [indicatorData, setIndicatorData] = useState([]);
-
-  // Sample JSON data (you can replace it with your own data)
-  const initialData = [
+/* 
+data format:
+ data: [
     {
-      id: 1,
-      indicator: {
-        name: "Indicator 1",
-      },
-      // ... other fields
+      indicator_name: "Number of papers"
+      indicator_data: []
     },
+    ...
+  ]
+
+
+data format:
+ data: [
     {
-      id: 2,
-      indicator: {
-        name: "Indicator 2",
-      },
-      // ... other fields
+      indicator_name: "Number of papers"
+      indicator_data: [
+          {
+            id: 4,
+            date: "2023-12-20T12:00:00.000",
+            indicator: {
+              id: 2,
+              name: "Number of papers",
+              symbol: "NOP",
+            },
+            value: 10.0,
+          },
+          {
+            id: 6,
+            date: "2023-12-21T12:00:00.000",
+            indicator: {
+              id: 2,
+              name: "Number of papers",
+              symbol: "NOP",
+            },
+            value: 30.0,
+          },
+          ....
+        ]
     },
-    // ... add more indicators as needed
-  ];
+    ...
+ ]
+*/
 
-  // Function to add a new indicator to the state
-  const addIndicator = () => {
-    // Generate a new indicator object (you can customize this)
-    const newIndicator = {
-      id: indicatorData.length + 1,
-      indicator: {
-        name: `Indicator ${indicatorData.length + 1}`,
-      },
-      // ... other fields for the new indicator
-    };
+const IndicatorsMain = ({ data }) => {
+  // Initialize state to track which indicator is expanded
+  const [expandedIndicatorId, setExpandedIndicatorId] = useState(null);
 
-    // Update the state with the new indicator
-    setIndicatorData([...indicatorData, newIndicator]);
+  // Function to toggle the expanded state of an indicator
+  const toggleIndicator = (indicatorId) => {
+    console.log("pressed --> " + indicatorId);
+    setExpandedIndicatorId((prevId) =>
+      prevId === indicatorId ? null : indicatorId
+    );
   };
 
   return (
     <div>
-      <h1>Indicators Main</h1>
-      <button onClick={addIndicator}>Add Indicator</button>
-      {indicatorData.map((data) => (
-        <Indicator key={data.id} data={data} />
+      {/* <h1>Indicators Main</h1> */}
+      {data.map((indicator_component) => (
+        <div className={"indicator_component_panel"}>
+          <div
+            key={indicator_component.indicator_name}
+            onClick={() => toggleIndicator(indicator_component.indicator_name)}
+            className={`indicator-button ${
+              expandedIndicatorId === indicator_component.indicator_name
+                ? "active"
+                : ""
+            }`}
+          >
+            {indicator_component.indicator_name}
+          </div>
+          {expandedIndicatorId === indicator_component.indicator_name && (
+            <Indicator jsonData={indicator_component.indicator_data} />
+          )}
+        </div>
       ))}
     </div>
   );

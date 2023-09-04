@@ -13,7 +13,7 @@ import {
 const MetricsGraph = ({ data }) => {
   return (
     <div className="metrics-graph">
-      <h2>{data.length > 0 && data[0].metric.name}</h2>
+      {/* <h2>{data.length > 0 && data[0].metric.name}</h2> */}
       <ResponsiveContainer width="100%" height={400}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />

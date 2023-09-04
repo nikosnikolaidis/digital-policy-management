@@ -13,29 +13,7 @@
     margin-bottom: 10px;
     position: relative;
   }
-  
-  .metric-title:hover::before {
-    content: attr(data-equation);
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 50%;
-    background-color: #333;
-    color: #fff;
-    padding: 5px;
-    border-radius: 3px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-    z-index: 1;
-    pointer-events: none;
-  }
-  
-  .metric-title:hover::before {
-    opacity: 0.7;
-  }
-
-  
+    
   .tab-buttons {
     display: flex;
     justify-content: space-between;
@@ -46,14 +24,14 @@
     flex: 1;
     padding: 10px;
     border: none;
-    background-color: #3498db; /* Default button color */
+    background-color: #817f7f; /* Default button color */
     color: #fff;
     cursor: pointer;
     transition: background-color 0.2s ease;
   }
   
   .tab-buttons button.active {
-    background-color: #e74c3c; /* Active button color */
+    background-color: #3498db; /* Active button color */
   }
   
   .tab-content {

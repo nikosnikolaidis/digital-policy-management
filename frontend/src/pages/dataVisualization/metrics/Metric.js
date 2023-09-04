@@ -12,11 +12,8 @@ const Metric = ({ data }) => {
 
   return (
     <div className="metric">
-      <h2
-        className="metric-title"
-        data-equation={data.length > 0 && data[0].metric.equation}
-      >
-        {data.length > 0 && data[0].metric.name}
+      <h2 className="metric-title">
+        {data.length > 0 && data[0].metric.equation}
       </h2>
       <div className="tab-buttons">
         <button
