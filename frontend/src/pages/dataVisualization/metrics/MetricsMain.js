@@ -51,7 +51,6 @@ const MetricsMain = ({ data }) => {
 
   // Function to toggle the expanded state of an Metric
   const toggleMetric = (metricId) => {
-    console.log("pressed --> " + metricId);
     setExpandedMetricId((prevId) => (prevId === metricId ? null : metricId));
   };
 

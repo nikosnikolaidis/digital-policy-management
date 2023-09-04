@@ -40,6 +40,12 @@
     margin-top: 20px;
   }
 
+      
+  .tab-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
   
 /* Style for the tab buttons */
 .tab-button {

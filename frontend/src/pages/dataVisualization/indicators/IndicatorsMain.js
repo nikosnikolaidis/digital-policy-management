@@ -51,7 +51,6 @@ const IndicatorsMain = ({ data }) => {
 
   // Function to toggle the expanded state of an indicator
   const toggleIndicator = (indicatorId) => {
-    console.log("pressed --> " + indicatorId);
     setExpandedIndicatorId((prevId) =>
       prevId === indicatorId ? null : indicatorId
     );
@@ -59,7 +58,6 @@ const IndicatorsMain = ({ data }) => {
 
   return (
     <div>
-      {/* <h1>Indicators Main</h1> */}
       {data.map((indicator_component) => (
         <div className={"indicator_component_panel"}>
           <div
