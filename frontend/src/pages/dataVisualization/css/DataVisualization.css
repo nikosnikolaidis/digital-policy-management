@@ -1,0 +1,85 @@
+
+.pair-container {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+  }
+  
+  .pair {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .pair:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .key {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .value {
+    color: #333;
+  }
+  
+  .graph-container {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  }
+
+
+  .add-new-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .add-new-button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .add-new-button:hover {
+    background-color: #2980b9;
+  }
+  
+  .add-new-form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+  
+  .add-new-form input,
+  .add-new-form textarea {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  graph-container {
+    width: 80%; /* Set the initial width to 80% */
+    margin: 0 auto; /* Center the container horizontally */
+    display: flex;
+    justify-content: center; /* Center its children horizontally */
+  }
+  
+  .chart-wrapper {
+    max-width: 100%; /* Allow the chart to expand within the container */
+    width: 100%;
+    flex: 1; /* Allow the chart to grow and occupy remaining space */
+  }
