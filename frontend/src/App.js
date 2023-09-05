@@ -12,8 +12,8 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import isAuthenticated from "./scripts/Tokens";
 import Graphs from "./pages/dataVisualization/Graphs";
-import TestIndicators from "./pages/dataVisualization/indicators/TestIndicators";
-import TestMetrics from "./pages/dataVisualization/metrics/TestMetrics";
+import TestIndicators from "./pages/dataVisualization/indicators/IndicatorsMain";
+import TestMetrics from "./pages/dataVisualization/metrics/MetricsMain";
 
 function App() {
   const [valid, setvalid] = useState();

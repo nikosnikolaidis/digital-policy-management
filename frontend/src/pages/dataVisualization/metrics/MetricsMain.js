@@ -55,7 +55,7 @@ const MetricsMain = ({ data }) => {
   };
 
   return (
-    <div>
+    <div className="Metric">
       {data.map((metric_component) => (
         <div className={"metric_component_panel"}>
           <div
