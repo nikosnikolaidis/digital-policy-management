@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "./css/IndicatorData.css";
 
 const IndicatorData = ({ data, onDeleteItem }) => {
   return (
-    <div class="interaction-box">
+    <div className="interaction-box">
       {/* <h2>{data[0].indicator.name}</h2> */}
       <ul>
         {data.map((item) => (

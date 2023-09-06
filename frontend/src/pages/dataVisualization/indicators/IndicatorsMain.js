@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import Indicator from "./Indicator"; // Import the Indicator component
 import "./css/IndicatorsMain.css";
 
@@ -26,72 +25,67 @@ data format:
 */
 
 const IndicatorsMain = () => {
-  // Initialize state to track which indicator is expanded
   const [expandedIndicatorId, setExpandedIndicatorId] = useState(null);
   const [data, setData] = useState([]);
   const [indicatorNames, setIndicatorNames] = useState([]);
+  const [apiResponses, setApiResponses] = useState([]);
 
-  useEffect(async () => {
-    setData([]);
-    var myHeaders = new Headers();
-    myHeaders.append(
-      "Authorization",
-      "Bearer " + localStorage.getItem("accessToken")
-    );
+  var test = "xxx";
 
-    var requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const myHeaders = new Headers();
+        myHeaders.append(
+          "Authorization",
+          "Bearer " + localStorage.getItem("accessToken")
+        );
+
+        const requestOptions = {
+          method: "GET",
+          headers: myHeaders,
+          redirect: "follow",
+        };
+
+        // Step 1: Make an initial API call to fetch the JSON table
+        const response = await fetch(
+          `http://${test}/indicator/all`,
+          requestOptions
+        );
+        const result = await response.json();
+
+        if (Array.isArray(result) && result.length > 0) {
+          const indicatorNames = result.map((item) => item.name);
+          setIndicatorNames(indicatorNames);
+
+          // Step 2: Iterate through the JSON table and make API calls
+          const apiPromises = indicatorNames.map(async (indName) => {
+            const apiResponse = await fetch(
+              `http://${test}/report/indicator?indicatorName=${indName}`,
+              requestOptions
+            );
+            return apiResponse.json();
+          });
+
+          // Step 3: Wait for all API calls to complete and update state
+          const responses = await Promise.all(apiPromises);
+          const newData = responses.map((response, i) => ({
+            indicator_name: indicatorNames[i],
+            indicator_data: response,
+          }));
+          setData(newData);
+          setApiResponses(responses);
+        } else {
+          console.log("API response is empty or not an array:", result);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
     };
 
-    await fetch("http://xxx/indicator/all", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        for (var i = 0; i < result.length; i++) {
-          var newIndicatorNames = indicatorNames;
-          newIndicatorNames.push(result[i].name);
-          setIndicatorNames(newIndicatorNames);
-          console.log("result[i].name ---> " + result[i].name);
-          var myHeaders = new Headers();
-          myHeaders.append(
-            "Authorization",
-            "Bearer " + localStorage.getItem("accessToken")
-          );
+    fetchData();
+  }, []); // Empty dependency array to run once on component mount
 
-          var requestOptions = {
-            method: "GET",
-            headers: myHeaders,
-            redirect: "follow",
-          };
-        }
-      })
-      .catch((error) => console.log("error", error));
-
-    for (var ind = 0; ind < indicatorNames.length; ind++) {
-      await fetch(
-        "http://xxx/report/indicator?indicatorName=" + indicatorNames[ind],
-        requestOptions
-      )
-        .then((response) => response.text())
-        .then((reportResult) => {
-          console.log("indicatorNames[ind] --> " + indicatorNames[ind]);
-          var dataNew = data;
-          dataNew.push({
-            indicator_name: indicatorNames[ind],
-            indicator_data: JSON.parse(reportResult),
-          });
-          console.log(
-            "indicatorNames[indicatorNames.length - 1] ----> " + indicatorNames
-          );
-          setData(dataNew);
-          console.log("data ---> " + JSON.stringify(data));
-        })
-        .catch((error) => console.log("error", error));
-    }
-  }, []);
-
-  // Function to toggle the expanded state of an indicator
   const toggleIndicator = (indicatorId) => {
     setExpandedIndicatorId((prevId) =>
       prevId === indicatorId ? null : indicatorId
