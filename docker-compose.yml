@@ -27,6 +27,42 @@ services:
     ports:
       - '5455:5432'
 
+  jbpm-strategic:
+    image: jboss/jbpm-server-full:7.61.0.Final
+    container_name: jbpm-strategic
+    hostname: testjbpm
+    domainname: testjbpm.local
+    environment:
+      JBPM_DB_DRIVER: mysql
+      JBPM_DB_HOST: jbpm-mysql-strategic
+    depends_on:
+      - jbpm-mysql-strategic
+    volumes:
+      - ./.niogit:/opt/jboss/wildfly/bin/.niogit:Z
+    ports:
+      - '8181:8080'
+      - '8001:8001'
+  
+  jbpm-mysql-strategic:
+    image: mysql:8.1
+    container_name: jbpm-mysql-strategic
+    volumes:
+      - strategic_mysql_db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: jbpm
+      MYSQL_USER: jbpm
+      MYSQL_PASSWORD: jbpm
+
+  nginx-strategic:
+    image: nginx:1.25
+    container_name: nginx-strategic
+    hostname: testnginx
+    domainname: testnginx.local
+    ports:
+      - "8000:80"
+
 volumes:
   strategic_postgresql:
   strategic_postgresql_data:
+  strategic_mysql_db:
