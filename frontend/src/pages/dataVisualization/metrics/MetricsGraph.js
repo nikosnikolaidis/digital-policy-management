@@ -24,7 +24,7 @@ const MetricsGraph = ({ data }) => {
           <Line
             type="monotone"
             dataKey="value"
-            name={data[0].metric.IndicatorList[0].name}
+            name={data[0].metric.indicatorList[0].name}
             stroke="#8884d8"
           />
         </LineChart>
