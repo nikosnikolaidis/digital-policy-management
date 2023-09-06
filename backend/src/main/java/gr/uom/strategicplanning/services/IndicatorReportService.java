@@ -16,6 +16,8 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -53,8 +55,8 @@ public class IndicatorReportService {
         IndicatorReport indicatorReport = new IndicatorReport(indicatorUpdateReport.getDate(), indicator, indicatorUpdateReport.getValue());
         indicatorReportRepository.save(indicatorReport);
 
-        //update all indicators that have this metric
-        // by creating a IndicatorReport for each one
+        //update all metric that have this indicators
+        // by creating a MetricReport for each one
         for(Metric i: indicator.getMetricList()){
             Double value = calculateMetric(i);
             MetricReport metricReport = new MetricReport(indicatorUpdateReport.getDate(), i, value);
@@ -74,9 +76,12 @@ public class IndicatorReportService {
             for(Indicator indicator : indicatorList){
                 if(indicator.getSymbol().equals(str)){
                     //get last value of this metric
-                    IndicatorReport indicatorReport = indicatorReportRepository.findTopByIndicatorSymbol(indicator.getSymbol());
-                    equationToSolve += indicatorReport.getValue();
-                    isIndicator = true;
+                    List<IndicatorReport> indicatorReportList = indicatorReportRepository.findAllByIndicatorSymbol(indicator.getSymbol());
+                    if(!indicatorReportList.isEmpty()) {
+                        IndicatorReport indicatorReport =  Collections.max(indicatorReportList, Comparator.comparing(IndicatorReport::getDate));
+                        equationToSolve += indicatorReport.getValue();
+                        isIndicator = true;
+                    }
                 }
             }
             if(!isIndicator){
