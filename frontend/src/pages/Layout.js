@@ -28,9 +28,9 @@ const Layout = () => {
 
   return (
     <>
-      <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="https://www.uom.gr">
+      <nav className="navbar" role="navigation" aria-label="main navigation">
+        <div className="navbar-brand">
+          <a className="navbar-item" href="https://www.uom.gr">
             <img
               src="https://www.uom.gr/site/images/logos/UOMLOGOGR.png"
               alt="uom-logo"
@@ -41,7 +41,7 @@ const Layout = () => {
 
           <div
             role="button"
-            class="navbar-burger"
+            className="navbar-burger"
             aria-label="menu"
             aria-expanded="false"
             data-target="navbar-menu"
@@ -53,62 +53,65 @@ const Layout = () => {
           </div>
         </div>
 
-        <div id="navbar-menu" class="navbar-menu">
-          <div class="navbar-start">
-            <Link to="/" class="navbar-item">
+        <div id="navbar-menu" className="navbar-menu">
+          <div className="navbar-start">
+            <Link to="/" className="navbar-item">
               Κεντρική
             </Link>
             {valid && (
               <>
-                <Link to="/workflows" class="navbar-item">
+                <Link to="/workflows" className="navbar-item">
                   Workflows
                 </Link>
-                <Link to="/metrics-setup" class="navbar-item">
+                <Link to="/metrics-setup" className="navbar-item">
                   Metrics Setup
                 </Link>
-                <Link to="/projects" class="navbar-item">
+                <Link to="/projects" className="navbar-item">
                   Projects
                 </Link>
 
                 <div
-                  class="navbar-item has-dropdown is-hoverable"
+                  className="navbar-item has-dropdown is-hoverable"
                   onClick={onClickMore}
                 >
-                  <a class="navbar-link">More</a>
+                  <a className="navbar-link">More</a>
 
-                  <div class="navbar-dropdown">
-                    <a class="navbar-item">About</a>
-                    <a class="navbar-item">Contact</a>
-                    <hr class="navbar-divider" />
-                    <a class="navbar-item">Report an issue</a>
+                  <div className="navbar-dropdown">
+                    <a className="navbar-item">About</a>
+                    <a className="navbar-item">Contact</a>
+                    <hr className="navbar-divider" />
+                    <a className="navbar-item">Report an issue</a>
                   </div>
                 </div>
               </>
             )}
-            <Link to="/graphs" class="navbar-item">
+            <Link to="/graphs" className="navbar-item">
               Παρακολούθηση Δεικτών
             </Link>
-            <Link to="/graphs" class="navbar-item">
+            <Link to="/graphs" className="navbar-item">
               Ταμπλό Δεικτών
             </Link>
-            <Link to="/indicators" class="navbar-item">
+            <Link to="/indicators" className="navbar-item">
               Διαχείριση Δεικτών
             </Link>
-            <Link to="/metrics" class="navbar-item">
+            <Link to="/metrics" className="navbar-item">
               Διαχείριση Μετρικών
             </Link>
           </div>
 
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <div className="buttons">
                 {!valid && (
                   <Link to="/login">
-                    <button class="button is-light">Log in</button>
+                    <button className="button is-light">Log in</button>
                   </Link>
                 )}
                 {valid && (
-                  <button class="button is-primary" onClick={() => logout()}>
+                  <button
+                    className="button is-primary"
+                    onClick={() => logout()}
+                  >
                     Log out
                   </button>
                 )}
