@@ -54,14 +54,6 @@ services:
       MYSQL_USER: jbpm
       MYSQL_PASSWORD: jbpm
 
-  nginx-strategic:
-    image: nginx:1.25
-    container_name: nginx-strategic
-    hostname: testnginx
-    domainname: testnginx.local
-    ports:
-      - "8000:80"
-
 volumes:
   strategic_postgresql:
   strategic_postgresql_data:
