@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import Indicator from "./Indicator"; // Import the Indicator component
 import "./css/IndicatorsMain.css";
 

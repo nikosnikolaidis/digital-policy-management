@@ -1,53 +1,100 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Metric from "./Metric"; // Import the Metric component
 import "./css/MetricsMain.css";
-
-/* 
+/*
 data format:
- data: [
-    {
-      indicator_name: "Number of papers"
-      indicator_data: []
+ data = [
+  {
+    metric_name: "Research",
+    metric_data: [
+      {
+        id: 3,
+        date: "2023-12-20T12:00:00.000",
+        metric: {
+          id: 3,
+          name: "research",
+          equation: "NOP / 50",
+          IndicatorList: [
+            {
+              id: 2,
+              name: "Number of papers",
+              symbol: "NOP",
+            },
+          ],
+        },
+        value: 0.2,
+      },
+      ....
     },
-    ...
+    .....
   ]
-
-
-data format:
- data: [
-    {
-      indicator_name: "Number of papers"
-      indicator_data: [
-          {
-            id: 4,
-            date: "2023-12-20T12:00:00.000",
-            indicator: {
-              id: 2,
-              name: "Number of papers",
-              symbol: "NOP",
-            },
-            value: 10.0,
-          },
-          {
-            id: 6,
-            date: "2023-12-21T12:00:00.000",
-            indicator: {
-              id: 2,
-              name: "Number of papers",
-              symbol: "NOP",
-            },
-            value: 30.0,
-          },
-          ....
-        ]
-    },
-    ...
- ]
 */
 
-const MetricsMain = ({ data }) => {
+const MetricsMain = ({}) => {
   // Initialize state to track which Metric is expanded
   const [expandedMetricId, setExpandedMetricId] = useState(null);
+  const [data, setData] = useState([]);
+  const [metricNames, setMetricNames] = useState([]);
+  const [apiResponses, setApiResponses] = useState([]);
+
+  var test = "xxx";
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const myHeaders = new Headers();
+        myHeaders.append(
+          "Authorization",
+          "Bearer " + localStorage.getItem("accessToken")
+        );
+
+        const requestOptions = {
+          method: "GET",
+          headers: myHeaders,
+          redirect: "follow",
+        };
+
+        // Step 1: Make an initial API call to fetch the JSON table
+        const response = await fetch(
+          `http://${test}/metric/all`,
+          requestOptions
+        );
+        const result = await response.json();
+
+        if (Array.isArray(result) && result.length > 0) {
+          const metricNames = result.map((item) => item.name);
+          setMetricNames(metricNames);
+
+          // Step 2: Iterate through the JSON table and make API calls
+          const apiPromises = metricNames.map(async (metricName) => {
+            const apiResponse = await fetch(
+              `http://${test}/report/metric?metricName=${metricName}`,
+              requestOptions
+            );
+            return apiResponse.json();
+          });
+
+          // Step 3: Wait for all API calls to complete and update state
+          const responses = await Promise.all(apiPromises);
+          const newData = responses.map((response, i) => ({
+            metric_name: metricNames[i],
+            metric_data: response,
+          }));
+          setData(newData);
+          setApiResponses(responses);
+
+          // console.log("responses --> " + JSON.stringify(responses));
+          // console.log("newData --> " + JSON.stringify(newData));
+        } else {
+          console.log("API response is empty or not an array:", result);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array to run once on component mount
 
   // Function to toggle the expanded state of an Metric
   const toggleMetric = (metricId) => {
