@@ -49,7 +49,7 @@ const IndicatorsMain = () => {
 
         // Step 1: Make an initial API call to fetch the JSON table
         const response = await fetch(
-          `http://${test}/indicator/all`,
+          process.env.REACT_APP_API_URL+`/indicator/all`,
           requestOptions
         );
         const result = await response.json();
@@ -61,7 +61,7 @@ const IndicatorsMain = () => {
           // Step 2: Iterate through the JSON table and make API calls
           const apiPromises = indicatorNames.map(async (indName) => {
             const apiResponse = await fetch(
-              `http://${test}/report/indicator?indicatorName=${indName}`,
+              process.env.REACT_APP_API_URL+`/report/indicator?indicatorName=${indName}`,
               requestOptions
             );
             return apiResponse.json();

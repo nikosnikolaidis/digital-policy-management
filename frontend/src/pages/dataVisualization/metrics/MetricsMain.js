@@ -56,7 +56,7 @@ const MetricsMain = ({}) => {
 
         // Step 1: Make an initial API call to fetch the JSON table
         const response = await fetch(
-          `http://${test}/metric/all`,
+          process.env.REACT_APP_API_URL+'/metric/all',
           requestOptions
         );
         const result = await response.json();
@@ -68,7 +68,7 @@ const MetricsMain = ({}) => {
           // Step 2: Iterate through the JSON table and make API calls
           const apiPromises = metricNames.map(async (metricName) => {
             const apiResponse = await fetch(
-              `http://${test}/report/metric?metricName=${metricName}`,
+              process.env.REACT_APP_API_URL+`/report/metric?metricName=${metricName}`,
               requestOptions
             );
             return apiResponse.json();
