@@ -28,7 +28,7 @@ services:
       - '5455:5432'
 
   jbpm-strategic:
-    image: jboss/jbpm-server-full:7.61.0.Final
+    image: nikosnikolaidis/jbpm-allowframes:7.61.0.Final
     container_name: jbpm-strategic
     hostname: testjbpm
     domainname: testjbpm.local
@@ -38,7 +38,7 @@ services:
     depends_on:
       - jbpm-mysql-strategic
     volumes:
-      - ./.niogit:/opt/jboss/wildfly/bin/.niogit:Z
+      - ./.niogit:/opt/jboss/wildfly/.niogit:Z
     ports:
       - '8181:8080'
       - '8001:8001'
