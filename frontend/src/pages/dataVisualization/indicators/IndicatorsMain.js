@@ -108,7 +108,10 @@ const IndicatorsMain = () => {
             {indicator_component.indicator_name}
           </div>
           {expandedIndicatorId === indicator_component.indicator_name && (
-            <Indicator jsonData={indicator_component.indicator_data} />
+            <Indicator
+              indicatorName={indicator_component.indicator_name}
+              jsonData={indicator_component.indicator_data}
+            />
           )}
         </div>
       ))}
