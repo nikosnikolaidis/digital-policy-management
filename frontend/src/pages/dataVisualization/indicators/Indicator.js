@@ -2,12 +2,17 @@ import "./css/Indicator.css";
 import React, { useState } from "react";
 import IndicatorGraph from "./IndicatorGraph";
 import IndicatorData from "./IndicatorData";
+import AddData from "./AddData";
 
-const Indicator = ({ jsonData }) => {
+const Indicator = ({ indicatorName, jsonData }) => {
   const [data, setData] = useState(jsonData);
-  const handleDeleteItem = (id) => {
-    const updatedData = data.filter((item) => item.id !== id);
-    setData(updatedData);
+  // const handleDeleteItem = (id) => {
+  //   const updatedData = data.filter((item) => item.id !== id);
+  //   setData(updatedData);
+  // };
+
+  const handleAddSuccess = (newData) => {
+    setData([...data, newData]);
   };
 
   const [activeTab, setActiveTab] = useState("Graph");
@@ -32,10 +37,19 @@ const Indicator = ({ jsonData }) => {
         >
           Data
         </button>
+        <button
+          className={`tab-button ${activeTab === "AddData" ? "active" : ""}`}
+          onClick={() => handleTabChange("AddData")}
+        >
+          Add Data
+        </button>
       </div>
       <div className="content">
         {activeTab === "Graph" && <IndicatorGraph data={data} />}
         {activeTab === "Data" && <IndicatorData data={data} />}
+        {activeTab === "AddData" && (
+          <AddData name={indicatorName} onAddSuccess={handleAddSuccess} />
+        )}
       </div>
     </div>
   );

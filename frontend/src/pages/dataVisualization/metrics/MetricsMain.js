@@ -14,7 +14,7 @@ data format:
           id: 3,
           name: "research",
           equation: "NOP / 50",
-          IndicatorList: [
+          indicatorList: [
             {
               id: 2,
               name: "Number of papers",
