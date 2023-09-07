@@ -12,5 +12,6 @@ public interface IndicatorReportRepository extends JpaRepository<IndicatorReport
     List<IndicatorReport> findAllByDate(Date date);
     List<IndicatorReport> findAllByDateBetween(Date dateStart, Date dateEnd);
     List<IndicatorReport> findAllByIndicatorName(String name);
+    List<IndicatorReport> findAllByIndicatorSymbol(String metricSymbol);
     IndicatorReport findTopByIndicatorSymbol(String metricSymbol);
 }

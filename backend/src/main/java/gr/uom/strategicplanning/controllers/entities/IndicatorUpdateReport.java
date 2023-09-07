@@ -12,9 +12,9 @@ public class IndicatorUpdateReport {
     private String name;
     private Double value;
 
-    public IndicatorUpdateReport(Date date, String metricName, Double value) {
+    public IndicatorUpdateReport(Date date, String name, Double value) {
         this.date = date;
-        this.name = metricName;
+        this.name = name;
         this.value = value;
     }
 
