@@ -4,8 +4,10 @@ import gr.uom.strategicplanning.models.IndicatorReport;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IndicatorReportRepository extends JpaRepository<IndicatorReport, Long> {
@@ -14,4 +16,5 @@ public interface IndicatorReportRepository extends JpaRepository<IndicatorReport
     List<IndicatorReport> findAllByIndicatorName(String name);
     List<IndicatorReport> findAllByIndicatorSymbol(String metricSymbol);
     IndicatorReport findTopByIndicatorSymbol(String metricSymbol);
+    Optional<IndicatorReport> findByNameAndDate(String name, Date date);
 }

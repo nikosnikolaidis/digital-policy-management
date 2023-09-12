@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -30,6 +31,8 @@ public class IndicatorReportService {
     IndicatorRepository indicatorRepository;
     @Autowired
     MetricReportRepository MetricReportRepository;
+    @Autowired
+    MetricReportRepository IndicatorReportRepository;
 
     public List<IndicatorReport> getAllByDate(Date date){
         return indicatorReportRepository.findAllByDate(date);
@@ -101,5 +104,33 @@ public class IndicatorReportService {
             e.printStackTrace();
         }
         return 0.0;
+    }
+
+    @Transactional
+    public void deleteIndicatorReport(IndicatorUpdateReport indicatorUpdateReport) {
+        Indicator indicator = indicatorRepository.findByName(indicatorUpdateReport.getName())
+                .orElseThrow(() -> {
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Indicator with name "+indicatorUpdateReport.getName()+" doesn't exist");
+                });
+        IndicatorReport indicatorReport = indicatorReportRepository.findByNameAndDate(indicatorUpdateReport.getName(), indicatorUpdateReport.getDate())
+                .orElseThrow(() -> {
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Report with name  "+indicatorUpdateReport.getName()+" and date "+ indicatorUpdateReport.getDate() +" doesn't exist");
+                });
+
+
+        //delete Metric Reports of this indicator report
+        List<MetricReport> metricReport = MetricReportRepository.findAllByDate(indicatorReport.getDate());
+        for (Metric metric: indicator.getMetricList()){
+            for (MetricReport mr: metricReport) {
+                if (metric.getName().equals(mr.getMetric().getName())){
+                    MetricReportRepository.delete(mr);
+                }
+            }
+        }
+
+        //toDo
+        //Update values of future Metric Reports which used this indicator value
+
+        indicatorReportRepository.delete(indicatorReport);
     }
 }
