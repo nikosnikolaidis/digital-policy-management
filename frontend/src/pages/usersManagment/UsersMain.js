@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TestUser from "./VerifiedUsersList";
+import UsersList from "./VerifiedUsersList";
 import "./css/UsersMain.css";
 
 var data = [
@@ -20,9 +20,11 @@ var data = [
     verified: true,
   },
 ];
+
+
 const UsersMain = () => {
-  const [isList1Collapsed, setList1Collapsed] = useState(false);
-  const [isList2Collapsed, setList2Collapsed] = useState(false);
+  const [isList1Collapsed, setList1Collapsed] = useState(true);
+  const [isList2Collapsed, setList2Collapsed] = useState(true);
 
   const toggleList1 = () => {
     setList1Collapsed(!isList1Collapsed);
@@ -34,26 +36,22 @@ const UsersMain = () => {
 
   return (
     <div className="users-main">
-      <div className={`collapsible ${isList1Collapsed ? "collapsed" : ""}`}>
-        <div className="collapsible-header" onClick={toggleList1}>
-          Users
-          <span
-            className={`arrow ${isList1Collapsed ? "collapsed" : ""}`}
-          ></span>
+      <div className={`collapsible ${isList1Collapsed ? 'collapsed' : ''}`}>
+        <div className={`collapsible-header ${!isList1Collapsed ? 'expanded' : ''}`} onClick={toggleList1}>
+          Verified Users
+          <span className={`arrow ${isList1Collapsed ? 'collapsed' : ''}`}>&#9660;</span>
         </div>
         <div className="collapsible-content">
-          <TestUser userList={data} />
+          {!isList1Collapsed && <UsersList userList={data} />}
         </div>
       </div>
-      <div className={`collapsible ${isList2Collapsed ? "collapsed" : ""}`}>
-        <div className="collapsible-header" onClick={toggleList2}>
-          Users 2
-          <span
-            className={`arrow ${isList2Collapsed ? "collapsed" : ""}`}
-          ></span>
+      <div className={`collapsible ${isList2Collapsed ? 'collapsed' : ''}`}>
+        <div className={`collapsible-header ${!isList2Collapsed ? 'expanded' : ''}`} onClick={toggleList2}>
+          Unverified Users
+          <span className={`arrow ${isList2Collapsed ? 'collapsed' : ''}`}>&#9660;</span>
         </div>
         <div className="collapsible-content">
-          <TestUser userList={data} />
+          {!isList2Collapsed && <UsersList userList={data} />}
         </div>
       </div>
     </div>

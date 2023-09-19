@@ -58,6 +58,9 @@ const Layout = () => {
             <Link to="/" className="navbar-item">
               Κεντρική
             </Link>
+            <Link to="/graphs" className="navbar-item">
+              Ταμπλό Δεικτών
+            </Link>
             {valid && (
               <>
                 <Link to="/workflows" className="navbar-item">
@@ -68,6 +71,15 @@ const Layout = () => {
                 </Link>
                 <Link to="/projects" className="navbar-item">
                   Projects
+                </Link>
+                <Link to="/indicators" className="navbar-item">
+                  Διαχείριση Δεικτών
+                </Link>
+                <Link to="/metrics" className="navbar-item">
+                  Διαχείριση Μετρικών
+                </Link>
+                <Link to="/users" className="navbar-item">
+                  Διαχείριση Χρηστών
                 </Link>
 
                 <div
@@ -85,21 +97,6 @@ const Layout = () => {
                 </div>
               </>
             )}
-            <Link to="/graphs" className="navbar-item">
-              Παρακολούθηση Δεικτών
-            </Link>
-            <Link to="/graphs" className="navbar-item">
-              Ταμπλό Δεικτών
-            </Link>
-            <Link to="/indicators" className="navbar-item">
-              Διαχείριση Δεικτών
-            </Link>
-            <Link to="/metrics" className="navbar-item">
-              Διαχείριση Μετρικών
-            </Link>
-            <Link to="/users" className="navbar-item">
-              Διαχείριση Χρηστών
-            </Link>
           </div>
 
           <div className="navbar-end">

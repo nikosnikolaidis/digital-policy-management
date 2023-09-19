@@ -11,7 +11,7 @@ import NoPage from "./pages/NoPage";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import isAuthenticated from "./scripts/Tokens";
-import Graphs from "./pages/dataVisualization/Graphs";
+import Graphs from "./pages/dataVisualization/publicGraphs/Graphs";
 import TestIndicators from "./pages/dataVisualization/indicators/IndicatorsMain";
 import TestMetrics from "./pages/dataVisualization/metrics/MetricsMain";
 import TestUsers from "./pages/usersManagment/UsersMain";

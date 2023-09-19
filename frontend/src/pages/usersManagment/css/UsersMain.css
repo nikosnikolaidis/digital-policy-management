@@ -1,46 +1,58 @@
-
 .users-main {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-}
-
-.collapsible {
+  }
+  
+  .collapsible {
     width: 100%;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-}
-
-.collapsible-header {
+    overflow: hidden;
+  }
+  
+  .collapsible-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px 20px;
     cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
+    background-color: #f0f0f0;
+    /* color: #fff; */
     user-select: none;
-}
-
-.collapsible-header:hover {
-    background-color: #0056b3;
-}
-
-.collapsed .arrow::after {
-    content: '\25BC'; /* Down arrow symbol */
-}
-
-.collapsible-content {
-    display: block;
-    max-height: 0;
+  }
+  
+  .collapsible-header:hover {
+    background-color: #ccc;
+  }
+  
+  .arrow {
+    font-size: 18px;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .collapsed .arrow {
+    transform: rotate(180deg);
+  }
+  
+  .collapsible-content {
+    /* max-height: 0; */
     overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
-    padding: 10px 20px;
+    /* transition: max-height 10.5s ease-in-out; */
+    /* padding: 10px 20px; */
     background-color: #f9f9f9;
-}
+  }
+  
+  .collapsed .collapsible-content {
+    max-height: none;
+  }
 
-.collapsed .collapsible-content {
-    max-height: 0;
-}
+  /* Style for the expanded header */
+.collapsible-header.expanded {
+    background-color: #007bff; /* Blue background color for expanded header */
+    color: white;
+  }
