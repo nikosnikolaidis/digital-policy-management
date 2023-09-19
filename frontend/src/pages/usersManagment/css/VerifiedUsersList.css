@@ -1,0 +1,71 @@
+
+.users-list {
+  /* border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9; */
+    
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .user-list {
+    /* border: 1px solid #ccc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background-color: #f9f9f9; */
+      padding: 20px;
+      margin: 10px;
+      background-color: #f9f9f9;
+    }
+    
+  .filter-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    flex-grow: 1;
+  }
+  
+  label {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  .user-list {
+    max-height: 300px; /* Set the maximum height for the user list */
+    overflow-y: auto; /* Add a scrollbar for overflow */
+  }
+  
+  .user-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Style the radio button */
+  input[type="radio"] {
+    margin-right: 5px;
+  }
+  
+  /* Style the VerifiedUser component if needed */
+  /* Example:
+  .verified-user {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  */

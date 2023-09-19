@@ -97,6 +97,9 @@ const Layout = () => {
             <Link to="/metrics" className="navbar-item">
               Διαχείριση Μετρικών
             </Link>
+            <Link to="/users" className="navbar-item">
+              Διαχείριση Χρηστών
+            </Link>
           </div>
 
           <div className="navbar-end">

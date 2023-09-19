@@ -14,6 +14,7 @@ import isAuthenticated from "./scripts/Tokens";
 import Graphs from "./pages/dataVisualization/Graphs";
 import TestIndicators from "./pages/dataVisualization/indicators/IndicatorsMain";
 import TestMetrics from "./pages/dataVisualization/metrics/MetricsMain";
+import TestUsers from "./pages/usersManagment/UsersMain";
 
 function App() {
   const [valid, setvalid] = useState();
@@ -40,6 +41,7 @@ function App() {
             <Route path="graphs" element={<Graphs />} />
             <Route path="indicators" element={<TestIndicators />} />
             <Route path="metrics" element={<TestMetrics />} />
+            <Route path="users" element={<TestUsers />} />
             <Route path="login" element={<Login />} />
             <Route path="*" element={<NoPage />} />
           </Route>

@@ -1,0 +1,46 @@
+
+.users-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.collapsible {
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.collapsible-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    user-select: none;
+}
+
+.collapsible-header:hover {
+    background-color: #0056b3;
+}
+
+.collapsed .arrow::after {
+    content: '\25BC'; /* Down arrow symbol */
+}
+
+.collapsible-content {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+}
+
+.collapsed .collapsible-content {
+    max-height: 0;
+}
