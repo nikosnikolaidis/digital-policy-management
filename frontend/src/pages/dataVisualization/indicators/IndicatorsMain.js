@@ -30,8 +30,6 @@ const IndicatorsMain = () => {
   const [indicatorNames, setIndicatorNames] = useState([]);
   const [apiResponses, setApiResponses] = useState([]);
 
-  var test = "xxx";
-
   useEffect(() => {
     const fetchData = async () => {
       try {

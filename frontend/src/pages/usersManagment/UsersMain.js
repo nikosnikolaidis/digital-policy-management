@@ -1,30 +1,13 @@
 import React, { useState, useEffect } from "react";
-import UsersList from "./VerifiedUsersList";
+import VerifiedUsersList from "./VerifiedUsersList";
+import UnverifiedUsersList from "./UnverifiedUsersList";
 import "./css/UsersMain.css";
-
-var data = [
-  {
-    id: 1,
-    name: "Admin",
-    email: "admin@uom.gr",
-    password: "jasdhasud",
-    roles: "SIMPLE,PRIVILEGED",
-    verified: true,
-  },
-  {
-    id: 33,
-    name: "test",
-    email: "test@uom.gr",
-    password: "hashdbas",
-    roles: "SIMPLE",
-    verified: true,
-  },
-];
-
 
 const UsersMain = () => {
   const [isList1Collapsed, setList1Collapsed] = useState(true);
   const [isList2Collapsed, setList2Collapsed] = useState(true);
+  const [verifiedUsers, setVerifiedUsers] = useState([]);
+  const [unverifiedUsers, setUnverifiedUsers] = useState([]);
 
   const toggleList1 = () => {
     setList1Collapsed(!isList1Collapsed);
@@ -32,6 +15,58 @@ const UsersMain = () => {
 
   const toggleList2 = () => {
     setList2Collapsed(!isList2Collapsed);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const myHeaders = new Headers();
+        myHeaders.append(
+          "Authorization",
+          "Bearer " + localStorage.getItem("accessToken")
+        );
+
+        const requestOptions = {
+          method: "GET",
+          headers: myHeaders,
+          redirect: "follow",
+        };
+
+        // Step 1: Make an initial API call to fetch the JSON table
+        const response = await fetch(
+          process.env.REACT_APP_API_URL+`/user/all`,
+          requestOptions
+        );
+        const result = await response.json();
+
+        if (Array.isArray(result) && result.length > 0) {
+          // console.log("API response result:", result);
+
+          var tempUsers = result.filter((user) => user.verified);
+          setVerifiedUsers(tempUsers);
+          tempUsers = result.filter((user) => !user.verified)
+          setUnverifiedUsers(tempUsers);
+        } else {
+          console.log("API response is empty or not an array:", result);
+        } 
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array to run once on component mount
+
+
+
+  const handleUserVerification = (newData) => {
+    //add to verified
+    //remove from unverified
+
+    // setData([...data, newData]);
+  };
+  const handleUserAuthorisation = (newData) => {
+    // setData([...data, newData]);
   };
 
   return (
@@ -42,7 +77,7 @@ const UsersMain = () => {
           <span className={`arrow ${isList1Collapsed ? 'collapsed' : ''}`}>&#9660;</span>
         </div>
         <div className="collapsible-content">
-          {!isList1Collapsed && <UsersList userList={data} />}
+          {!isList1Collapsed && <VerifiedUsersList userList={verifiedUsers} authoriseUser={handleUserAuthorisation}/>}
         </div>
       </div>
       <div className={`collapsible ${isList2Collapsed ? 'collapsed' : ''}`}>
@@ -51,7 +86,7 @@ const UsersMain = () => {
           <span className={`arrow ${isList2Collapsed ? 'collapsed' : ''}`}>&#9660;</span>
         </div>
         <div className="collapsible-content">
-          {!isList2Collapsed && <UsersList userList={data} />}
+          {!isList2Collapsed && <UnverifiedUsersList userList={unverifiedUsers} verifyUser={handleUserVerification}/>}
         </div>
       </div>
     </div>

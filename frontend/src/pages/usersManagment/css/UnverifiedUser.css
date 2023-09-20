@@ -1,5 +1,4 @@
-
-.unverified-user {
+  .unverified-user {
     border: 1px solid #ccc;
     padding: 10px;
     margin: 10px 0;
@@ -17,25 +16,21 @@
     font-size: 20px;
     font-weight: bold;
     color: #333;
+    margin-right: 10px; /* Add spacing between name and email */
   }
   
   .user-email {
     font-size: 16px;
     color: #555;
-    margin-left: 10px; /* Add spacing between name and email */
   }
   
   .verify-button {
-    margin-left: auto; /* Push the button to the right */
     padding: 5px 10px;
     background-color: #007bff;
     color: #fff;
     border: none;
     cursor: pointer;
-  }
-  
-  .verify-button:hover {
-    background-color: #0056b3;
+    margin-left: 10px; /* Add spacing between email and button */
   }
   
   .user-roles {

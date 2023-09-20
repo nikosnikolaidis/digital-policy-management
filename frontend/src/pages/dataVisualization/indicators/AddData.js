@@ -46,7 +46,7 @@ const AddData = ({ name, onAddSuccess }) => {
         value: value,
       };
       const response = await axios
-        .post("http://xxx/report/indicator", data, config)
+        .post(process.env.REACT_APP_API_URL+"/report/indicator", data, config)
         .then((response) => {
           console.log(response.data); // Access the response data here
           if (response.status === 200) {

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import VerifiedUser from "./VerifiedUser"; // Import your VerifiedUser component
+import UnverifiedUser from "./UnverifiedUser"; // Import your VerifiedUser component
 import "./css/VerifiedUsersList.css";
 
-const VerifiedUsersList = ({ userList, authoriseUser }) => {
+const UnverifiedUsersList = ({ userList, verifyUser }) => {
   const [filterText, setFilterText] = useState("");
   const [showPrivileged, setShowPrivileged] = useState(false);
 
@@ -23,7 +23,7 @@ const VerifiedUsersList = ({ userList, authoriseUser }) => {
       user.email.toLowerCase().includes(filterLowerCase);
 
     return (
-      isMatch && (!showPrivileged || rolesLowerCase.includes("privileged"))
+      isMatch
     );
   });
 
@@ -36,22 +36,14 @@ const VerifiedUsersList = ({ userList, authoriseUser }) => {
           value={filterText}
           onChange={handleFilterTextChange}
         />
-        <label>
-          <input
-            type="checkbox"
-            checked={showPrivileged}
-            onChange={handlePrivilegedChange}
-          />
-          Show Privileged
-        </label>
       </div>
       <div className="user-list">
         {filteredUsers.map((user) => (
-          <VerifiedUser key={user.id} user={user} authoriseUser={authoriseUser}/>
+          <UnverifiedUser key={user.id} user={user} verifyUser={verifyUser} />
         ))}
       </div>
     </div>
   );
 };
 
-export default VerifiedUsersList;
+export default UnverifiedUsersList;
