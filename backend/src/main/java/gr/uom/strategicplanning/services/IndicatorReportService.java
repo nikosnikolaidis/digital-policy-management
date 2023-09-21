@@ -108,7 +108,7 @@ public class IndicatorReportService {
 
     @Transactional
     public void deleteIndicatorReport(IndicatorUpdateReport indicatorUpdateReport) {
-        Indicator indicator = indicatorRepository.findByName(indicatorUpdateReport.getName())
+        /*Indicator indicator = indicatorRepository.findByName(indicatorUpdateReport.getName())
                 .orElseThrow(() -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Indicator with name "+indicatorUpdateReport.getName()+" doesn't exist");
                 });
@@ -132,5 +132,6 @@ public class IndicatorReportService {
         //Update values of future Metric Reports which used this indicator value
 
         indicatorReportRepository.delete(indicatorReport);
+        */
     }
 }
