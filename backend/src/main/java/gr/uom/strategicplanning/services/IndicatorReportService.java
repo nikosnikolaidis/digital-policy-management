@@ -112,7 +112,7 @@ public class IndicatorReportService {
                 .orElseThrow(() -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Indicator with name "+indicatorUpdateReport.getName()+" doesn't exist");
                 });
-        IndicatorReport indicatorReport = indicatorReportRepository.findByNameAndDate(indicatorUpdateReport.getName(), indicatorUpdateReport.getDate())
+        IndicatorReport indicatorReport = indicatorReportRepository.findByDateAndIndicatorName(indicatorUpdateReport.getDate(),indicatorUpdateReport.getName())
                 .orElseThrow(() -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Report with name  "+indicatorUpdateReport.getName()+" and date "+ indicatorUpdateReport.getDate() +" doesn't exist");
                 });
