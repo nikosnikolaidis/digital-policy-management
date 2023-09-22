@@ -1,0 +1,51 @@
+.projects-main {
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    /* max-height: 400px; */
+    overflow-y: auto; /* Enable vertical scroll if content overflows */
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 70%;
+  }
+  
+  select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 25%;
+  }
+  
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow: scroll;
+  }
+  
+  /* Style individual Project components (customize as needed) */
+  .project {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #fff;
+  }
+  
+  /* Highlight the matched text */
+  .highlight {
+    background-color: yellow;
+  }

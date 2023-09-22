@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./css/Project.css";
 
 const Project = ({ projectData }) => {
   const [isObjectiveCollapsed, setObjectiveCollapsed] = useState(true);
@@ -7,38 +8,61 @@ const Project = ({ projectData }) => {
     setObjectiveCollapsed(!isObjectiveCollapsed);
   };
 
+  const participantAcronyms = projectData.participants.map(
+    (participant) => participant.acronym
+  );
+
   return (
     <div className="project">
       <div className="project-header">
         <div className="project-header-line">
-          <span>ID: {projectData.id}</span>
-          <span>Title: {projectData.title}</span>
+          <span className="bold-text">ID:</span>
+          <span>{projectData.id}</span>
+          <span className="bold-text">, Title:</span>
+          <span className="underline-text">{projectData.title}</span>
           <span>({projectData.acronym})</span>
-          <span>Start Date: {projectData.startDate}</span>
-          <span>End Date: {projectData.endDate}</span>
+          <span className="bold-text">, Date: </span>
+          <span>{projectData.startDate}</span>
+          <span className="bold-text">to</span>
+          <span>{projectData.endDate}</span>
         </div>
-        <div className="project-objective" onClick={toggleObjective}>
-          Objective
-          <span className={`arrow ${isObjectiveCollapsed ? "collapsed" : ""}`}>
-            &#9660;
-          </span>
-        </div>
+      </div>
+      <div className="project-objective bold-text" onClick={toggleObjective}>
+        Objective
+        <span className={`arrow ${isObjectiveCollapsed ? "collapsed" : ""}`}>
+          &#9660;
+        </span>
       </div>
       {!isObjectiveCollapsed && (
-        <div className="project-objective-content">{projectData.objective}</div>
+        <div className="project-objective-content">
+          <div className="project-objective-text">{projectData.objective}</div>
+        </div>
       )}
-      <div className="project-topics">Topics: {projectData.topics}</div>
-      <div className="project-details">
-        <span>Total Cost: {projectData.totalCost}</span>
-        <span>Programme: {projectData.programme}</span>
-        <span>Call: {projectData.call}</span>
-        <span>Funding Scheme: {projectData.fundingScheme}</span>
+      <div className="project-topics">
+        <span className="bold-text">Topics: </span>
+        <span>{projectData.topics}</span>
+      </div>
+
+      <div className="project-header">
+        <div className="project-details">
+          <span className="bold-text">Total Cost: </span>
+          <span>{projectData.totalCost}</span>
+          <span className="bold-text"> €</span>
+          <span className="bold-text">, Programme: </span>
+          <span>{projectData.programme}</span>
+          <span className="bold-text">, Call: </span>
+          <span>{projectData.call}</span>
+          <span className="bold-text">, Funding Scheme: </span>
+          <span>{projectData.fundingScheme}</span>
+        </div>
       </div>
       <div className="project-coordinator">
-        Coordinator: {projectData.coordinator.name}
+        <span className="bold-text">Coordinator: </span>
+        <span>{projectData.coordinator.name}</span>
       </div>
       <div className="project-participants">
-        Participants: {projectData.participants.join(", ")}
+        <span className="bold-text">Participants: </span>
+        {participantAcronyms.join(", ")}
       </div>
     </div>
   );

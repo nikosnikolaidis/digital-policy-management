@@ -12,9 +12,10 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import isAuthenticated from "./scripts/Tokens";
 import Graphs from "./pages/dataVisualization/publicGraphs/Graphs";
-import TestIndicators from "./pages/dataVisualization/indicators/IndicatorsMain";
-import TestMetrics from "./pages/dataVisualization/metrics/MetricsMain";
-import TestUsers from "./pages/usersManagment/UsersMain";
+import IndicatorsMain from "./pages/dataVisualization/indicators/IndicatorsMain";
+import MetricsMain from "./pages/dataVisualization/metrics/MetricsMain";
+import UsersMain from "./pages/usersManagment/UsersMain";
+import ProjectsMain from "./pages/projects/ProjectsMain";
 
 function App() {
   const [valid, setvalid] = useState();
@@ -34,14 +35,14 @@ function App() {
               <>
                 <Route path="workflows" element={<Workflows />} />
                 <Route path="metrics-setup" element={<MetricsSetup />} />
-                <Route path="projects" element={<Projects />} />
+                <Route path="projects" element={<ProjectsMain />} />
+                <Route path="graphs" element={<Graphs />} />
+                <Route path="indicators" element={<IndicatorsMain />} />
+                <Route path="metrics" element={<MetricsMain />} />
+                <Route path="users" element={<UsersMain />} />
               </>
             )}
             <Route path="register" element={<Register />} />
-            <Route path="graphs" element={<Graphs />} />
-            <Route path="indicators" element={<TestIndicators />} />
-            <Route path="metrics" element={<TestMetrics />} />
-            <Route path="users" element={<TestUsers />} />
             <Route path="login" element={<Login />} />
             <Route path="*" element={<NoPage />} />
           </Route>
