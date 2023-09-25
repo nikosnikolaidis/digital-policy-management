@@ -34,7 +34,7 @@ const UsersMain = () => {
 
         // Step 1: Make an initial API call to fetch the JSON table
         const response = await fetch(
-          process.env.REACT_APP_API_URL+`/user/all`,
+          process.env.REACT_APP_API_URL + `/user/all`,
           requestOptions
         );
         const result = await response.json();
@@ -44,25 +44,21 @@ const UsersMain = () => {
 
           var tempUsers = result.filter((user) => user.verified);
           setVerifiedUsers(tempUsers);
-          tempUsers = result.filter((user) => !user.verified)
+          tempUsers = result.filter((user) => !user.verified);
           setUnverifiedUsers(tempUsers);
         } else {
           console.log("API response is empty or not an array:", result);
-        } 
+        }
       } catch (error) {
         console.error("Error:", error);
       }
     };
-
     fetchData();
   }, []); // Empty dependency array to run once on component mount
-
-
 
   const handleUserVerification = (newData) => {
     //add to verified
     //remove from unverified
-
     // setData([...data, newData]);
   };
   const handleUserAuthorisation = (newData) => {
@@ -71,22 +67,46 @@ const UsersMain = () => {
 
   return (
     <div className="users-main">
-      <div className={`collapsible ${isList1Collapsed ? 'collapsed' : ''}`}>
-        <div className={`collapsible-header ${!isList1Collapsed ? 'expanded' : ''}`} onClick={toggleList1}>
+      <div className={`collapsible ${isList1Collapsed ? "collapsed" : ""}`}>
+        <div
+          className={`collapsible-header ${
+            !isList1Collapsed ? "expanded" : ""
+          }`}
+          onClick={toggleList1}
+        >
           Verified Users
-          <span className={`arrow ${isList1Collapsed ? 'collapsed' : ''}`}>&#9660;</span>
+          <span className={`arrow ${isList1Collapsed ? "collapsed" : ""}`}>
+            &#9660;
+          </span>
         </div>
         <div className="collapsible-content">
-          {!isList1Collapsed && <VerifiedUsersList userList={verifiedUsers} authoriseUser={handleUserAuthorisation}/>}
+          {!isList1Collapsed && (
+            <VerifiedUsersList
+              userList={verifiedUsers}
+              authoriseUser={handleUserAuthorisation}
+            />
+          )}
         </div>
       </div>
-      <div className={`collapsible ${isList2Collapsed ? 'collapsed' : ''}`}>
-        <div className={`collapsible-header ${!isList2Collapsed ? 'expanded' : ''}`} onClick={toggleList2}>
+      <div className={`collapsible ${isList2Collapsed ? "collapsed" : ""}`}>
+        <div
+          className={`collapsible-header ${
+            !isList2Collapsed ? "expanded" : ""
+          }`}
+          onClick={toggleList2}
+        >
           Unverified Users
-          <span className={`arrow ${isList2Collapsed ? 'collapsed' : ''}`}>&#9660;</span>
+          <span className={`arrow ${isList2Collapsed ? "collapsed" : ""}`}>
+            &#9660;
+          </span>
         </div>
         <div className="collapsible-content">
-          {!isList2Collapsed && <UnverifiedUsersList userList={unverifiedUsers} verifyUser={handleUserVerification}/>}
+          {!isList2Collapsed && (
+            <UnverifiedUsersList
+              userList={unverifiedUsers}
+              verifyUser={handleUserVerification}
+            />
+          )}
         </div>
       </div>
     </div>

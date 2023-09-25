@@ -49,3 +49,14 @@
   .highlight {
     background-color: yellow;
   }
+
+.filtered-count-label {
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  background-color: #007bff; /* Background color of the label */
+  color: #fff; /* Text color of the label */
+  padding: 5px 10px; /* Padding around the label text */
+  font-weight: bold; /* Bold text */
+  border-radius: 5px; /* Rounded corners */
+}
