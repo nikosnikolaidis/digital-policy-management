@@ -6,7 +6,6 @@ import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Workflows from "./pages/Workflows";
 import MetricsSetup from "./pages/MetricsSetup";
-import Projects from "./pages/Projects";
 import NoPage from "./pages/NoPage";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -15,7 +14,8 @@ import Graphs from "./pages/dataVisualization/publicGraphs/Graphs";
 import IndicatorsMain from "./pages/dataVisualization/indicators/IndicatorsMain";
 import MetricsMain from "./pages/dataVisualization/metrics/MetricsMain";
 import UsersMain from "./pages/usersManagment/UsersMain";
-import ProjectsMain from "./pages/projects/ProjectsMain";
+import ProjectsOrgs from "./pages/projectsAndOrganizations/ProjsAndOrgs";
+///projects/ProjectsMain";
 
 function App() {
   const [valid, setvalid] = useState();
@@ -35,7 +35,7 @@ function App() {
               <>
                 <Route path="workflows" element={<Workflows />} />
                 <Route path="metrics-setup" element={<MetricsSetup />} />
-                <Route path="projects" element={<ProjectsMain />} />
+                <Route path="projects" element={<ProjectsOrgs />} />
                 <Route path="graphs" element={<Graphs />} />
                 <Route path="indicators" element={<IndicatorsMain />} />
                 <Route path="metrics" element={<MetricsMain />} />
