@@ -5,6 +5,11 @@
     border-radius: 5px;
     /* max-height: 400px; */
     overflow-y: auto; /* Enable vertical scroll if content overflows */
+    
+    height: 90vh; /* Set the height of projects-main to fill the screen */
+    display: flex; /* Use flexbox to arrange children */
+    flex-direction: column; /* Arrange children vertically */
+  
   }
   
   .search-bar {
@@ -29,11 +34,14 @@
   }
   
   .projects-list {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: space-between;
-    overflow: scroll;
+    justify-content: space-between; */
+
+    flex: 1; /* Allow projects-list to grow and fill remaining space */
+  overflow-y: auto; /* Add a vertical scrollbar when needed */
+
   }
   
   /* Style individual Project components (customize as needed) */
