@@ -1,0 +1,94 @@
+.project {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
+
+.project-header {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.arrow {
+  font-size: 14px;
+  margin-left: 5px;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+.collapsed .arrow {
+  transform: rotate(180deg);
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.underline-text{
+  text-decoration: underline;
+  background-color: beige;
+}
+
+.project-topics {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.project-coordinator {
+  margin-top: 10px;
+  text-align: left;
+}
+
+
+.project-objective {
+  cursor: pointer;
+  color: #0b2f57;
+  user-select: none;
+  display: flex;
+  align-items: center;
+}
+
+.project-objective-content {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  margin-right: 3%;
+  text-align: justify;
+  border-style: ridge;
+  border-width: 1px;
+}
+
+.project-objective-text {
+  margin: 10px;
+  text-align: justify;
+}
+
+.project-details span {
+  margin-right: 10px;
+  display: inline-flex;
+}
+
+
+
+.project-info {
+  cursor: pointer;
+  color: #0b2f57;
+  user-select: none;
+  display: flex;
+  align-items: center;
+}
+
+.project-info-content {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  margin-right: 3%;
+  text-align: justify;
+  border-style: ridge;
+  border-width: 1px;
+}
+
+.project-info-text {
+  margin: 10px;
+  text-align: justify;
+}
