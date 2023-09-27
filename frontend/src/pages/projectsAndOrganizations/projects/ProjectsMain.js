@@ -1,10 +1,28 @@
 import React, { useState, useEffect } from "react";
 import ProjectsList from "./ProjectsList";
+import "./css/ProjectsMain.css";
 
 const ProjectsMain = () => {
   const [projectsData, setProjectsData] = useState([]);
+  const [totalItems, setTotalItems] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
 
-  useEffect(() => {
+  function fetchDataDB(page, keyword) {
+    var call = "/euproject/finished/project/all?size=50";
+
+    page = page === undefined ? "" : page;
+    if (page !== null && page !== "" && page >= 0) {
+      call += "&page=";
+      call += page;
+    }
+
+    keyword = keyword === undefined ? "" : keyword;
+    if (keyword !== null && keyword !== "") {
+      call += "&contain=" + keyword;
+      call += keyword;
+    }
+
     const fetchData = async () => {
       try {
         const myHeaders = new Headers();
@@ -21,7 +39,7 @@ const ProjectsMain = () => {
 
         // Step 1: Make an initial API call to fetch the JSON table
         const response = await fetch(
-          process.env.REACT_APP_API_URL + `/euproject/finished/project/all`,
+          process.env.REACT_APP_API_URL + call,
           requestOptions
         );
         const result = await response.json();
@@ -29,10 +47,10 @@ const ProjectsMain = () => {
         // const result = await Promise.call(response);
 
         if (Array.isArray(result.solutions) && result.solutions.length > 0) {
-          console.log("got projects from DB");
           setProjectsData(result.solutions); // Update state with fetched data
-          // console.log("projectsData: " + JSON.stringify(projectsData));
-          // console.log("projectsData: " + JSON.stringify(result.solutions));
+          setTotalItems(result.totalItems);
+          setTotalPages(result.totalPages);
+          setCurrentPage(result.currentPage);
         } else {
           console.log("API response is empty or not an array:", result);
         }
@@ -41,11 +59,42 @@ const ProjectsMain = () => {
       }
     };
     fetchData();
+  }
+
+  const handleNextPage = () => {
+    if (currentPage >= totalPages - 1) {
+      return;
+    }
+    fetchDataDB(currentPage + 1);
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage <= 0) {
+      return;
+    }
+    fetchDataDB(currentPage - 1);
+  };
+
+  useEffect(() => {
+    fetchDataDB();
   }, []); // Empty dependency array to run once on component mount
 
   return (
     <div>
-      <ProjectsList projectsData={projectsData} />
+      <div className="projects-list-container">
+        <ProjectsList projectsData={projectsData} totalItems={totalItems} />
+      </div>
+      <div className="pages">
+        <button onClick={handlePreviousPage} disabled={currentPage === 0}>
+          ◄ Previous
+        </button>
+        <span>
+          {currentPage + 1} / {totalPages}
+        </span>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+          Next ►
+        </button>
+      </div>
     </div>
   );
 };

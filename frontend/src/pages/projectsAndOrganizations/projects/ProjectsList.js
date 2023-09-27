@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Project from "./Project";
 import "./css/ProjectsList.css";
 
-const ProjectsList = ({ projectsData }) => {
+const ProjectsList = ({ projectsData, totalItems }) => {
   const [searchText, setSearchText] = useState("");
   const [searchField, setSearchField] = useState("all");
 
@@ -50,7 +50,8 @@ const ProjectsList = ({ projectsData }) => {
           <option value="topics">Topic</option>
         </select>
         <div className="filtered-count-label">
-          {filteredProjects.length} noP
+          {/* {filteredProjects.length} noP */}
+          {totalItems}
         </div>
       </div>
       <div className="projects-list">
