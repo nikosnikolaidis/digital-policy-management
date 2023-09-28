@@ -4,14 +4,9 @@ import "./css/VerifiedUsersList.css";
 
 const UnverifiedUsersList = ({ userList, verifyUser }) => {
   const [filterText, setFilterText] = useState("");
-  const [showPrivileged, setShowPrivileged] = useState(false);
 
   const handleFilterTextChange = (e) => {
     setFilterText(e.target.value);
-  };
-
-  const handlePrivilegedChange = (e) => {
-    setShowPrivileged(e.target.checked);
   };
 
   const filteredUsers = userList.filter((user) => {
@@ -22,9 +17,7 @@ const UnverifiedUsersList = ({ userList, verifyUser }) => {
       user.name.toLowerCase().includes(filterLowerCase) ||
       user.email.toLowerCase().includes(filterLowerCase);
 
-    return (
-      isMatch
-    );
+    return isMatch;
   });
 
   return (

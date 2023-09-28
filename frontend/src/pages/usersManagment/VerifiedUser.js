@@ -1,39 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import "./css/VerifiedUser.css";
 
-const VerifiedUser = ({ user, authoriseUser}) => {
-  const { name, email, roles, verified } = user;
-
-  // Check if the roles include "PRIVILEGED"
-  const hasPrivilegedRole = roles.includes("PRIVILEGED");
+const VerifiedUser = ({ user, hasPrivilegedRole, authoriseUser }) => {
+  const { name, email, roles } = user;
+  // const [verUser, setVerUser] = useState(user);
 
   const handleAuthorise = async (e) => {
     e.preventDefault();
+    try {
+      const accessToken = localStorage.getItem("accessToken");
 
-  //   try {
-  //     const config = {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-  //       },
-  //     };
-  //     const response = await axios
-  //       .post(process.env.REACT_APP_API_URL+"/report/indicator", , )
-  //       .then((response) => {
-  //         console.log(response.data); // Access the response data here
-  //         if (response.status === 200) {
-  //           verifyUser({ date, value }); // Notify the parent component
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error:", error);
-  //       });
-  //   } catch (error) {
-  //     setMessage(false, "Error durring verification");
-  //   }
+      const headers = {
+        Authorization: `Bearer ${accessToken}`,
+      };
 
+      // Use Axios for the API request
+      const response = await axios.put(
+        `${process.env.REACT_APP_API_URL}/admin/authorize?email=${email}`,
+        null,
+        {
+          headers,
+        }
+      );
+
+      console.log(response.data);
+      authoriseUser(response.data);
+    } catch (error) {
+      console.log("Error during Authorization");
+      console.error(error);
+    }
   };
-
 
   return (
     <div className="verified-user">
@@ -41,7 +38,9 @@ const VerifiedUser = ({ user, authoriseUser}) => {
         <div className="user-name">{name}</div>
         <div className="user-email">{email}</div>
         {hasPrivilegedRole ? null : (
-          <button className="authorize-button" onClick={handleAuthorise}>Authorize</button>
+          <button className="authorize-button" onClick={handleAuthorise}>
+            Authorize
+          </button>
         )}
       </div>
       <div className="user-roles">Roles: {roles}</div>

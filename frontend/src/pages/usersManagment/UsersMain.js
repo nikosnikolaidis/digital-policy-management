@@ -56,13 +56,37 @@ const UsersMain = () => {
     fetchData();
   }, []); // Empty dependency array to run once on component mount
 
-  const handleUserVerification = (newData) => {
-    //add to verified
-    //remove from unverified
-    // setData([...data, newData]);
+  const handleUserVerification = (user) => {
+    if (!user.verified) {
+      return;
+    }
+    var newUsers = unverifiedUsers;
+    let obj = newUsers.find((usr, i) => {
+      if (usr.email === user.email) {
+        newUsers.splice(i, 1);
+        return true; // stop searching
+      }
+    });
+    setUnverifiedUsers(newUsers);
+
+    // add the user to the verified ones
+    setVerifiedUsers((current) => [...current, user]);
   };
-  const handleUserAuthorisation = (newData) => {
-    // setData([...data, newData]);
+
+  const handleUserAuthorisation = (user) => {
+    console.log("UsersMain - authorizing user: " + user.email);
+    console.log("UsersMain - user: " + JSON.stringify(user));
+
+    let obj = verifiedUsers.find((usr, i) => {
+      if (usr.email === user.email) {
+        // verifiedUsers[i] = user;
+        verifiedUsers.splice(i, 1);
+        return true; // stop searching
+      }
+    });
+
+    // setVerifiedUsers(verifiedUsers);
+    setVerifiedUsers((current) => [...current, user]);
   };
 
   return (

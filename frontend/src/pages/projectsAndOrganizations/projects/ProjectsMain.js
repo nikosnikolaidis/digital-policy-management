@@ -46,8 +46,8 @@ const ProjectsMain = () => {
 
         // const result = await Promise.call(response);
 
-        if (Array.isArray(result.solutions) && result.solutions.length > 0) {
-          setProjectsData(result.solutions); // Update state with fetched data
+        if (Array.isArray(result.projects) && result.projects.length > 0) {
+          setProjectsData(result.projects); // Update state with fetched data
           setTotalItems(result.totalItems);
           setTotalPages(result.totalPages);
           setCurrentPage(result.currentPage);

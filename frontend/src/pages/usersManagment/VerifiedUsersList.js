@@ -47,7 +47,12 @@ const VerifiedUsersList = ({ userList, authoriseUser }) => {
       </div>
       <div className="user-list">
         {filteredUsers.map((user) => (
-          <VerifiedUser key={user.id} user={user} authoriseUser={authoriseUser}/>
+          <VerifiedUser
+            key={user.id}
+            user={user}
+            hasPrivilegedRole={user.roles.includes("PRIVILEGED")}
+            authoriseUser={authoriseUser}
+          />
         ))}
       </div>
     </div>
