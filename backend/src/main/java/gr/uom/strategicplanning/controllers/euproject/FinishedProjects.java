@@ -52,10 +52,11 @@ public class FinishedProjects {
     }
 
     @GetMapping("/project/all")
-    ResponseEntity<Map<String, Object>> getAllProjects(@RequestParam(required = false) String contain,
+    ResponseEntity<Map<String, Object>> getAllProjects(@RequestParam(required = false) String containTitle,
+                                                       @RequestParam(required = false) String containObjective,
                                                        @RequestParam(defaultValue = "0") int page,
                                                        @RequestParam(defaultValue = "100") int size){
-        return projectService.getAllProjects(contain,page,size);
+        return projectService.getAllProjects(containTitle,containObjective,page,size);
     }
 
 }

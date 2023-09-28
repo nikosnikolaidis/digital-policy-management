@@ -41,26 +41,31 @@ public class ProjectService {
     }
 
     @Transactional
-    public ResponseEntity<Map<String, Object>> getAllProjects(String contain, int page, int size){
+    public ResponseEntity<Map<String, Object>> getAllProjects(String containTitle, String containObjective, int page, int size){
         Pageable paging = PageRequest.of(page, size);
-        Page<Project> pageProject;
-        if(contain==null) {
+        Page<Project> pageProject = null;
+        if((containTitle==null || containTitle.equals("")) && (containObjective==null || containObjective.equals(""))) {
             pageProject = projectRepository.findAll(paging);
         }
+        else if(containTitle!=null && !containTitle.equals("")){
+            pageProject = projectRepository.findByTitleContainingIgnoreCase(containTitle, paging);
+        }
         else {
-            pageProject = projectRepository.findByTitleContainingIgnoreCase(contain, paging);
-            if(pageProject.getContent().isEmpty()) {
-                pageProject = projectRepository.findByObjectiveContainingIgnoreCase(contain, paging);
-            }
+            pageProject = projectRepository.findByObjectiveContainingIgnoreCase(containObjective, paging);
         }
 
-        Map<String, Object> response = new HashMap<>();
-        List<Project> projects = pageProject.getContent();
-        response.put("solutions", projects);
-        response.put("currentPage", pageProject.getNumber());
-        response.put("totalItems", pageProject.getTotalElements());
-        response.put("totalPages", pageProject.getTotalPages());
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        if(pageProject!=null) {
+            Map<String, Object> response = new HashMap<>();
+            List<Project> projects = pageProject.getContent();
+            response.put("projects", projects);
+            response.put("currentPage", pageProject.getNumber());
+            response.put("totalItems", pageProject.getTotalElements());
+            response.put("totalPages", pageProject.getTotalPages());
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(new HashMap<>(), HttpStatus.NO_CONTENT);
+        }
     }
 
     @Transactional
