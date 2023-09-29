@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import VerifiedUser from "./VerifiedUser"; // Import your VerifiedUser component
 import "./css/VerifiedUsersList.css";
 
-const VerifiedUsersList = ({ userList, authoriseUser }) => {
+const VerifiedUsersList = ({ userList, authoriseUser, deleteUser }) => {
   const [filterText, setFilterText] = useState("");
   const [showPrivileged, setShowPrivileged] = useState(false);
 
@@ -52,6 +52,7 @@ const VerifiedUsersList = ({ userList, authoriseUser }) => {
             user={user}
             hasPrivilegedRole={user.roles.includes("PRIVILEGED")}
             authoriseUser={authoriseUser}
+            deleteUser={deleteUser}
           />
         ))}
       </div>

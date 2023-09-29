@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import UnverifiedUser from "./UnverifiedUser"; // Import your VerifiedUser component
 import "./css/VerifiedUsersList.css";
 
-const UnverifiedUsersList = ({ userList, verifyUser }) => {
+const UnverifiedUsersList = ({ userList, verifyUser, deleteUser }) => {
   const [filterText, setFilterText] = useState("");
 
   const handleFilterTextChange = (e) => {
@@ -32,7 +32,12 @@ const UnverifiedUsersList = ({ userList, verifyUser }) => {
       </div>
       <div className="user-list">
         {filteredUsers.map((user) => (
-          <UnverifiedUser key={user.id} user={user} verifyUser={verifyUser} />
+          <UnverifiedUser
+            key={user.id}
+            user={user}
+            verifyUser={verifyUser}
+            deleteUser={deleteUser}
+          />
         ))}
       </div>
     </div>

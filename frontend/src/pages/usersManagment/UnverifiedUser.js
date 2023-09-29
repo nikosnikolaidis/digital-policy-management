@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import "./css/UnverifiedUser.css";
 
-const UnverifiedUser = ({ user, verifyUser }) => {
+const UnverifiedUser = ({ user, verifyUser, deleteUser }) => {
   const { name, email, roles } = user;
 
   const handleVerify = async (e) => {
@@ -30,6 +30,10 @@ const UnverifiedUser = ({ user, verifyUser }) => {
     }
   };
 
+  const handleDelete = () => {
+    deleteUser(email, false);
+  };
+
   return (
     <div className="unverified-user">
       <div className="user-info">
@@ -37,6 +41,9 @@ const UnverifiedUser = ({ user, verifyUser }) => {
         <div className="user-email">{email}</div>
         <button className="verify-button" onClick={handleVerify}>
           Verify
+        </button>
+        <button className="delete-button" onClick={handleDelete}>
+          Delete
         </button>
       </div>
       <div className="user-roles">Roles: {roles}</div>

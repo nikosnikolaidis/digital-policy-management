@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./css/VerifiedUser.css";
 
-const VerifiedUser = ({ user, hasPrivilegedRole, authoriseUser }) => {
+const VerifiedUser = ({
+  user,
+  hasPrivilegedRole,
+  authoriseUser,
+  deleteUser,
+}) => {
   const { name, email, roles } = user;
   // const [verUser, setVerUser] = useState(user);
 
@@ -32,6 +37,10 @@ const VerifiedUser = ({ user, hasPrivilegedRole, authoriseUser }) => {
     }
   };
 
+  const handleDelete = () => {
+    deleteUser(email, true);
+  };
+
   return (
     <div className="verified-user">
       <div className="user-info">
@@ -42,6 +51,9 @@ const VerifiedUser = ({ user, hasPrivilegedRole, authoriseUser }) => {
             Authorize
           </button>
         )}
+        <button className="delete-button" onClick={handleDelete}>
+          Delete
+        </button>
       </div>
       <div className="user-roles">Roles: {roles}</div>
     </div>

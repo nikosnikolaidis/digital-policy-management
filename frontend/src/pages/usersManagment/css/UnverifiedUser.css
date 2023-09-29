@@ -32,6 +32,15 @@
     cursor: pointer;
     margin-left: 10px; /* Add spacing between email and button */
   }
+
+  .delete-button {
+    padding: 5px 10px;
+    background-color: #ff0000cb;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px; /* Add spacing between email and button */
+  }
   
   .user-roles {
     font-size: 16px;

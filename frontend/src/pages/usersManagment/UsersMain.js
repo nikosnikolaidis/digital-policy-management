@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import VerifiedUsersList from "./VerifiedUsersList";
 import UnverifiedUsersList from "./UnverifiedUsersList";
 import "./css/UsersMain.css";
+import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 const UsersMain = () => {
   const [isList1Collapsed, setList1Collapsed] = useState(true);
@@ -43,6 +45,22 @@ const UsersMain = () => {
           // console.log("API response result:", result);
 
           var tempUsers = result.filter((user) => user.verified);
+
+          //remove current PRIVILAGED user from tempUsers
+          var email = "";
+          var token = localStorage.getItem("accessToken");
+          if (token !== "" && token !== null) {
+            var decoded = jwt_decode(token);
+            email = decoded.sub;
+          }
+          console.log("email: " + email);
+          let obj = tempUsers.find((usr, i) => {
+            if (usr.email === email) {
+              tempUsers.splice(i, 1);
+              return true; // stop searching
+            }
+          });
+
           setVerifiedUsers(tempUsers);
           tempUsers = result.filter((user) => !user.verified);
           setUnverifiedUsers(tempUsers);
@@ -60,13 +78,7 @@ const UsersMain = () => {
     if (!user.verified) {
       return;
     }
-    var newUsers = unverifiedUsers;
-    let obj = newUsers.find((usr, i) => {
-      if (usr.email === user.email) {
-        newUsers.splice(i, 1);
-        return true; // stop searching
-      }
-    });
+    var newUsers = deleteFromUserList(unverifiedUsers, user.email);
     setUnverifiedUsers(newUsers);
 
     // add the user to the verified ones
@@ -77,16 +89,57 @@ const UsersMain = () => {
     console.log("UsersMain - authorizing user: " + user.email);
     console.log("UsersMain - user: " + JSON.stringify(user));
 
-    let obj = verifiedUsers.find((usr, i) => {
+    const newUserList = [...verifiedUsers];
+    let obj = newUserList.find((usr, i) => {
       if (usr.email === user.email) {
-        // verifiedUsers[i] = user;
-        verifiedUsers.splice(i, 1);
+        newUserList[i] = user;
         return true; // stop searching
       }
     });
+    setVerifiedUsers(newUserList);
+  };
 
-    // setVerifiedUsers(verifiedUsers);
-    setVerifiedUsers((current) => [...current, user]);
+  const handleUserDelete = async (email, isVerified) => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      const apiUrl = `${process.env.REACT_APP_API_URL}/admin/delete/user?email=${email}`;
+
+      // Define the request configuration object with headers
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      // Send the DELETE request with the configuration object
+      const response = await axios.delete(apiUrl, config);
+      if (response.status === 200) {
+        console.log("Deleted successfully:", response.data);
+
+        // Update the user lists based on whether the user was verified or not
+        if (isVerified) {
+          setVerifiedUsers(deleteFromUserList(verifiedUsers, email));
+        } else {
+          setUnverifiedUsers(deleteFromUserList(unverifiedUsers, email));
+        }
+      } else {
+        console.error("Unexpected status code:", response.status);
+      }
+    } catch (error) {
+      // Handle errors here
+      console.error("Error deleting:", error);
+    }
+  };
+
+  const deleteFromUserList = (userList, email) => {
+    const newUserList = [...userList];
+    let obj = newUserList.find((usr, i) => {
+      if (usr.email === email) {
+        newUserList.splice(i, 1);
+        return true; // stop searching
+      }
+    });
+    return newUserList;
   };
 
   return (
@@ -108,6 +161,7 @@ const UsersMain = () => {
             <VerifiedUsersList
               userList={verifiedUsers}
               authoriseUser={handleUserAuthorisation}
+              deleteUser={handleUserDelete}
             />
           )}
         </div>
@@ -129,6 +183,7 @@ const UsersMain = () => {
             <UnverifiedUsersList
               userList={unverifiedUsers}
               verifyUser={handleUserVerification}
+              deleteUser={handleUserDelete}
             />
           )}
         </div>
