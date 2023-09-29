@@ -1,13 +1,16 @@
 package gr.uom.strategicplanning.controllers.euproject;
 
+import gr.uom.strategicplanning.controllers.entities.CallEuropa;
 import gr.uom.strategicplanning.controllers.entities.ProjectSlim;
 import gr.uom.strategicplanning.models.euproject.Organization;
 import gr.uom.strategicplanning.models.euproject.Project;
 import gr.uom.strategicplanning.services.euproject.OrganizationService;
 import gr.uom.strategicplanning.services.euproject.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +18,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/euproject/finished/")
-public class FinishedProjects {
+public class EUProjectsController {
 
     @Autowired
     ProjectService projectService;
@@ -45,7 +48,6 @@ public class FinishedProjects {
 
 
 
-
     @GetMapping("/project")
     Project getProject(@RequestParam String title){
         return projectService.getProjectWithTitle(title);
@@ -59,4 +61,15 @@ public class FinishedProjects {
         return projectService.getAllProjects(containTitle,containObjective,page,size);
     }
 
+
+
+    @GetMapping("/project/new")
+    List<CallEuropa> getForthcomingProjects(@RequestParam(required = true) Boolean open, @RequestParam(required = false) String type){
+        if(type==null || type.equals("Tenders") || type.equals("Grants")) {
+            return projectService.getNewProjects(open, type);
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Type can de only Tenders or Grants");
+        }
+    }
 }

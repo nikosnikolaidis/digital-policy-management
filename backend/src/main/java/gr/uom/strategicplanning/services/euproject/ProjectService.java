@@ -1,13 +1,15 @@
 package gr.uom.strategicplanning.services.euproject;
 
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import gr.uom.strategicplanning.controllers.entities.CallEuropa;
 import gr.uom.strategicplanning.models.euproject.Project;
 import gr.uom.strategicplanning.repositories.euproject.OrganizationRepository;
 import gr.uom.strategicplanning.repositories.euproject.ProjectRepository;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +22,6 @@ import javax.transaction.Transactional;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -103,4 +104,46 @@ public class ProjectService {
         }
     }
 
+
+    public List<CallEuropa> getNewProjects(Boolean open, String type) {
+        List<CallEuropa> callEuropas = new ArrayList<>();
+        String query="";
+        if(open && (type==null || type.equals(""))){
+            query = "{\"bool\":{\"must\":[{\"terms\":{\"type\":[\"1\",\"2\",\"8\",\"0\"]}},{\"terms\":{\"status\":[\"31094502\"]}}]}}";
+        }
+        else if (!open && (type==null || type.equals(""))) {
+            query = "{\"bool\":{\"must\":[{\"terms\":{\"type\":[\"1\",\"2\",\"8\",\"0\"]}},{\"terms\":{\"status\":[\"31094501\"]}}]}}";
+        }
+        else if (open && type.equals("Tenders")){
+            query = "{\"bool\":{\"must\":[{\"terms\":{\"type\":[\"0\"]}},{\"terms\":{\"status\":[\"31094502\"]}}]}}";
+        }
+        else if (open && type.equals("Grants")){
+            query = "{\"bool\":{\"must\":[{\"terms\":{\"type\":[\"1\",\"2\",\"8\"]}},{\"terms\":{\"status\":[\"31094502\"]}}]}}";
+        }
+        else if (!open && type.equals("Tenders")){
+            query = "{\"bool\":{\"must\":[{\"terms\":{\"type\":[\"0\"]}},{\"terms\":{\"status\":[\"31094501\"]}}]}}";
+        }
+        else if (!open && type.equals("Grants")){
+            query = "{\"bool\":{\"must\":[{\"terms\":{\"type\":[\"1\",\"2\",\"8\"]}},{\"terms\":{\"status\":[\"31094501\"]}}]}}";
+        }
+
+        Unirest.setTimeouts(0, 0);
+        try {
+            HttpResponse<String> response = Unirest.post("https://api.tech.ec.europa.eu/search-api/prod/rest/search?apiKey=SEDIA&text=***&pageSize=1000&pageNumber=1")
+                    .header("Content-Type", "application/json")
+                    .field("query", query)
+                    .asString();
+            if(response.getStatus()==200){
+                //ToDo
+                //parse response
+                // and return Calls
+                return callEuropas;
+            }
+            else {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Response from Europa cannot be found");
+            }
+        } catch (UnirestException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
