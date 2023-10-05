@@ -64,9 +64,10 @@ public class EUProjectsController {
 
 
     @GetMapping("/project/new")
-    List<CallEuropa> getForthcomingProjects(@RequestParam(required = true) Boolean open, @RequestParam(required = false) String type){
-        if(type==null || type.equals("Tenders") || type.equals("Grants")) {
-            return projectService.getNewProjects(open, type);
+    List<CallEuropa> getForthcomingProjects(@RequestParam(required = true) Boolean open, @RequestParam(required = false) String type, @RequestParam(required = false) String sort){
+        if((type==null || type.equals("") || type.equals("Tenders") || type.equals("Grants")) &&
+                (sort==null || sort.equals("") || sort.equals("openDate") || sort.equals("deadlineDate"))) {
+            return projectService.getNewProjects(open, type, sort);
         }
         else {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Type can de only Tenders or Grants");

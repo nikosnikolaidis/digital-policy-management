@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -105,7 +106,7 @@ public class ProjectService {
     }
 
 
-    public List<CallEuropa> getNewProjects(Boolean open, String type) {
+    public List<CallEuropa> getNewProjects(Boolean open, String type, String sortType) {
         List<CallEuropa> callEuropas = new ArrayList<>();
         String query="";
         if(open && (type==null || type.equals(""))){
@@ -127,22 +128,44 @@ public class ProjectService {
             query = "{\"bool\":{\"must\":[{\"terms\":{\"type\":[\"1\",\"2\",\"8\"]}},{\"terms\":{\"status\":[\"31094501\"]}}]}}";
         }
 
-        Unirest.setTimeouts(0, 0);
+        String sort="";
+        if (sortType.equals("deadlineDate")){
+            sort = "{\"order\":\"ASC\",\"field\":\"deadlineDate\"}";
+        }
+        else {
+            sort = "{\"order\":\"ASC\",\"field\":\"startDate\"}";
+        }
+
         try {
-            HttpResponse<String> response = Unirest.post("https://api.tech.ec.europa.eu/search-api/prod/rest/search?apiKey=SEDIA&text=***&pageSize=1000&pageNumber=1")
-                    .header("Content-Type", "application/json")
-                    .field("query", query)
-                    .asString();
-            if(response.getStatus()==200){
-                //ToDo
-                //parse response
-                // and return Calls
-                return callEuropas;
+            BufferedWriter outputWriter = new BufferedWriter(new FileWriter("/query.json"));
+            outputWriter.write(query);
+            outputWriter.close();
+
+            BufferedWriter outputWriter2 = new BufferedWriter(new FileWriter("/sort.json"));
+            outputWriter2.write(sort);
+            outputWriter2.close();
+
+            Unirest.setTimeouts(0, 0);
+            try {
+                HttpResponse<String> response = Unirest.post("https://api.tech.ec.europa.eu/search-api/prod/rest/search?apiKey=SEDIA&text=***&pageSize=1000&pageNumber=1")
+                        .field("query", new File("/query.json"))
+                        .field("sort", new File("/sort.json"))
+                        .asString();
+                if(response.getStatus()==200){
+                    String text = new String(response.getRawBody().readAllBytes(), StandardCharsets.UTF_8);
+                    System.out.println(text);
+                    //ToDo
+                    //parse response
+                    // and return Calls
+                    return callEuropas;
+                }
+                else {
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Response from Europa cannot be found");
+                }
+            } catch (UnirestException e) {
+                throw new RuntimeException(e);
             }
-            else {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Response from Europa cannot be found");
-            }
-        } catch (UnirestException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
