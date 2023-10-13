@@ -16,6 +16,10 @@
   }
 }
 
+.main_container {
+  height: 90vh; /* Set the component height to 100% of the viewport height */
+}
+
 .logInContainer{
   display: flex;
   flex-direction: column;
@@ -88,7 +92,8 @@ button:hover{
 }
 
 .appContainer{
-  min-height: 90vh;
+  min-height: 90vh!;
+  max-height: 90vh!;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -114,7 +119,8 @@ button:hover{
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 90vh;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;

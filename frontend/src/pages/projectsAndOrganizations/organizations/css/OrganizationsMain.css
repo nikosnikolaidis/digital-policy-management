@@ -6,6 +6,12 @@
     padding: 20px;
   }
   
+  .InfoTab {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure it takes 100% of the parent's height */
+  }
+  
   .tab-header {
     display: flex;
     justify-content: space-between;
@@ -38,5 +44,9 @@
   /* Style individual tab content */
   .tab-content h2 {
     margin-top: 0;
+  }
+
+  .half_comp {
+    max-height: 50%;
   }
   

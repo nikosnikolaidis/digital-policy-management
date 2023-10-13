@@ -3,7 +3,7 @@ import "./css/OrganizationInfo.css";
 
 const OrganizationInfo = ({ organizationData }) => {
   return (
-    <div className="organization-info">
+    <div className="organization-info half_comp">
       <h2>{organizationData.name}</h2>
       <p>
         <strong>Acronym:</strong> {organizationData.acronym}

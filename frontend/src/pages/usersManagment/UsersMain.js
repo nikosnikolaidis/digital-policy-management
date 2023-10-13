@@ -101,13 +101,12 @@ const UsersMain = () => {
 
   const handleUserDelete = async (email, isVerified) => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
       const apiUrl = `${process.env.REACT_APP_API_URL}/admin/delete/user?email=${email}`;
 
       // Define the request configuration object with headers
       const config = {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       };
 
@@ -143,7 +142,7 @@ const UsersMain = () => {
   };
 
   return (
-    <div className="users-main">
+    <div className="users-main main_container">
       <div className={`collapsible ${isList1Collapsed ? "collapsed" : ""}`}>
         <div
           className={`collapsible-header ${

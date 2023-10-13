@@ -16,7 +16,7 @@ const ProjsAndOrgs = () => {
   // };
 
   return (
-    <div className="projs-and-orgs">
+    <div className="projs-and-orgs main_container">
       <div
         className={`projects ${
           isOrganizationsOpen ? "contracted" : "expanded"

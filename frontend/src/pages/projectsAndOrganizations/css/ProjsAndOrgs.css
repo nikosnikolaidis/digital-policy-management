@@ -2,7 +2,6 @@
 /* Container for the entire component */
 .projs-and-orgs {
   display: flex;
-  height: 100vh; /* Set the component height to 100% of the viewport height */
 }
   
   /* Left area for projects (adjust as needed) */
