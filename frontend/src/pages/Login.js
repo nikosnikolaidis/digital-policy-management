@@ -10,9 +10,9 @@ function Login(props) {
   const handleLogInSubmit = (event) => {
     event.preventDefault();
     var urlencoded = new URLSearchParams();
-    urlencoded.append("email", "admin@uom.gr");
-    urlencoded.append("password", "admin");
-    fetch(process.env.REACT_APP_API_URL+"/login", {
+    urlencoded.append("email", email);
+    urlencoded.append("password", password);
+    fetch(process.env.REACT_APP_API_URL + "/login", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: urlencoded,

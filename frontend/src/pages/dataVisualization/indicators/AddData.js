@@ -3,7 +3,7 @@ import axios from "axios";
 import "./css/AddData.css";
 
 const AddData = ({ name, onAddSuccess }) => {
-  const [date, setDate] = useState("");
+  // const [date, setDate] = useState("");
   const [value, setValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -22,16 +22,15 @@ const AddData = ({ name, onAddSuccess }) => {
     }
   }
 
-  const handleDateChange = (e) => {
-    setDate(e.target.value);
-  };
-
   const handleValueChange = (e) => {
     setValue(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    var date = new Date().toISOString();
+    console.log("date: " + date);
 
     try {
       const config = {
@@ -46,12 +45,11 @@ const AddData = ({ name, onAddSuccess }) => {
         value: value,
       };
       const response = await axios
-        .post(process.env.REACT_APP_API_URL+"/report/indicator", data, config)
+        .post(process.env.REACT_APP_API_URL + "/report/indicator", data, config)
         .then((response) => {
           console.log(response.data); // Access the response data here
           if (response.status === 200) {
             onAddSuccess({ date, value }); // Notify the parent component
-            setDate("");
             setValue("");
             setMessage(true, `Sucess! Added ${value} on ${date}`);
           } else {
@@ -59,7 +57,8 @@ const AddData = ({ name, onAddSuccess }) => {
           }
         })
         .catch((error) => {
-          console.error("Error:", error);
+          // console.error("Error:", error);
+          setMessage(false, "Error adding data");
         });
     } catch (error) {
       setMessage(false, "Error adding data");
@@ -70,8 +69,9 @@ const AddData = ({ name, onAddSuccess }) => {
     <div>
       <form onSubmit={handleSubmit}>
         <label>
-          Date :
-          <input type="date" value={date} onChange={handleDateChange} />
+          {/* Date :
+          <input type="date" value={date} onChange={handleDateChange} /> */}
+          Report for : {new Date().toDateString()}
         </label>
         <label>
           Value :

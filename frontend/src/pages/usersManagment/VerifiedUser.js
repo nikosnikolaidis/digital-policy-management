@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./css/VerifiedUser.css";
+import * as scripts from "../../scripts/Tokens.js";
 
 const VerifiedUser = ({
   user,
@@ -9,7 +10,6 @@ const VerifiedUser = ({
   deleteUser,
 }) => {
   const { name, email, roles } = user;
-  // const [verUser, setVerUser] = useState(user);
 
   const handleAuthorise = async (e) => {
     e.preventDefault();
@@ -47,13 +47,19 @@ const VerifiedUser = ({
         <div className="user-name">{name}</div>
         <div className="user-email">{email}</div>
         {hasPrivilegedRole ? null : (
-          <button className="authorize-button" onClick={handleAuthorise}>
+          <button
+            className="authorize-button"
+            onClick={handleAuthorise}
+            disabled={!scripts.isPrivileged()}
+          >
             Authorize
           </button>
         )}
-        <button className="delete-button" onClick={handleDelete}>
-          Delete
-        </button>
+        {scripts.isPrivileged() && (
+          <button className="delete-button" onClick={handleDelete}>
+            Delete
+          </button>
+        )}
       </div>
       <div className="user-roles">Roles: {roles}</div>
     </div>

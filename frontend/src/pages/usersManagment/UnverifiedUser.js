@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import "./css/UnverifiedUser.css";
+import * as scripts from "../../scripts/Tokens.js";
 
 const UnverifiedUser = ({ user, verifyUser, deleteUser }) => {
   const { name, email, roles } = user;
@@ -39,12 +40,18 @@ const UnverifiedUser = ({ user, verifyUser, deleteUser }) => {
       <div className="user-info">
         <div className="user-name">{name}</div>
         <div className="user-email">{email}</div>
-        <button className="verify-button" onClick={handleVerify}>
-          Verify
-        </button>
-        <button className="delete-button" onClick={handleDelete}>
-          Delete
-        </button>
+
+        {scripts.isPrivileged() && (
+          <button className="verify-button" onClick={handleVerify}>
+            Verify
+          </button>
+        )}
+
+        {scripts.isPrivileged() && (
+          <button className="delete-button" onClick={handleDelete}>
+            Delete
+          </button>
+        )}
       </div>
       <div className="user-roles">Roles: {roles}</div>
     </div>

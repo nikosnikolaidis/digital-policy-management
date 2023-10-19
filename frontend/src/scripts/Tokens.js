@@ -31,6 +31,7 @@ export function isPrivileged() {
 
   //chech if user is PRIVILEGED
   var decoded = jwt_decode(token);
+  console.log("decoded.roles " + decoded.roles);
   if (decoded.roles.includes("PRIVILEGED")) {
     return true;
   } else {
