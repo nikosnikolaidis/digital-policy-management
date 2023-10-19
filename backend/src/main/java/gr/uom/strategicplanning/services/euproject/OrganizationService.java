@@ -33,7 +33,7 @@ public class OrganizationService {
 
     @Transactional
     public Organization getOrganizationWithName(String name){
-        Organization organization = organizationRepository.findByName(name)
+        Organization organization = organizationRepository.findByNameIgnoreCase(name)
                 .orElseThrow(() -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Organization with name "+name+" doesn't exist");
                 });
