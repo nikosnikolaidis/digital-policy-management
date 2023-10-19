@@ -35,7 +35,7 @@ function App() {
                 <Route path="workflows" element={<Workflows />} />
                 <Route path="metrics-setup" element={<MetricsSetup />} />
                 <Route path="projects" element={<ProjectsOrgs />} />
-                <Route path="graphs" element={<Graphs />} />
+                {/* <Route path="graphs" element={<Graphs />} /> */}
                 <Route path="indicators" element={<IndicatorsMain />} />
                 <Route path="metrics" element={<MetricsMain />} />
                 <Route path="users" element={<UsersMain />} />

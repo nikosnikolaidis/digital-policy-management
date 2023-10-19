@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import VerifiedUsersList from "./VerifiedUsersList";
 import UnverifiedUsersList from "./UnverifiedUsersList";
 import "./css/UsersMain.css";
-import jwt_decode from "jwt-decode";
+import * as scripts from "../../scripts/Tokens";
 import axios from "axios";
 
 const UsersMain = () => {
@@ -47,13 +47,8 @@ const UsersMain = () => {
           var tempUsers = result.filter((user) => user.verified);
 
           //remove current PRIVILAGED user from tempUsers
-          var email = "";
-          var token = localStorage.getItem("accessToken");
-          if (token !== "" && token !== null) {
-            var decoded = jwt_decode(token);
-            email = decoded.sub;
-          }
-          console.log("email: " + email);
+          var email = scripts.getEmail();
+
           let obj = tempUsers.find((usr, i) => {
             if (usr.email === email) {
               tempUsers.splice(i, 1);

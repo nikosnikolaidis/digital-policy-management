@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import IndicatorGraph from "./IndicatorGraph";
 import IndicatorData from "./IndicatorData";
 import AddData from "./AddData";
+import * as scripts from "../../../scripts/Tokens";
 
 const Indicator = ({ indicatorName, jsonData }) => {
   const [data, setData] = useState(jsonData);
+  var privileged = scripts.isPrivileged;
   // const handleDeleteItem = (id) => {
   //   const updatedData = data.filter((item) => item.id !== id);
   //   setData(updatedData);
@@ -40,6 +42,7 @@ const Indicator = ({ indicatorName, jsonData }) => {
         <button
           className={`tab-button ${activeTab === "AddData" ? "active" : ""}`}
           onClick={() => handleTabChange("AddData")}
+          disabled={activeTab === "AddData" && !privileged}
         >
           Add Data
         </button>

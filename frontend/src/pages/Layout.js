@@ -58,9 +58,9 @@ const Layout = () => {
             <Link to="/" className="navbar-item">
               Κεντρική
             </Link>
-            <Link to="/graphs" className="navbar-item">
+            {/* <Link to="/graphs" className="navbar-item">
               Ταμπλό Δεικτών
-            </Link>
+            </Link> */}
             {valid && (
               <>
                 <Link to="/workflows" className="navbar-item">
@@ -86,14 +86,14 @@ const Layout = () => {
                   className="navbar-item has-dropdown is-hoverable"
                   onClick={onClickMore}
                 >
-                  <a className="navbar-link">More</a>
+                  {/* <a className="navbar-link">More</a>
 
                   <div className="navbar-dropdown">
                     <a className="navbar-item">About</a>
                     <a className="navbar-item">Contact</a>
                     <hr className="navbar-divider" />
                     <a className="navbar-item">Report an issue</a>
-                  </div>
+                  </div> */}
                 </div>
               </>
             )}
