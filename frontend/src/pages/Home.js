@@ -1,11 +1,12 @@
-import logo from "../logo.svg";
+import stg_logo from "../logos/ΜΣΣ logo 2 (EL).png";
 import "../App.css";
 
 const Home = () => {
   return (
     <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
+      <img src={stg_logo} alt="logo" />
+      {/* <img src={logo} className="App-logo" alt="logo" /> */}
+      <p className="description">
         Το πληροφοριακό σύστημα της Μονάδας Στρατηγικού Σχεδιασμού του
         Πανεπιστημίου Μακεδονίας έχει ως κύρια λειτουργία του την αποτύπωση,
         διαχείριση και παρακολούθηση του στρατηγικού σχεδίου, των

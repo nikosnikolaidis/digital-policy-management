@@ -103,18 +103,30 @@ const MetricsSetup = () => {
   return (
     <div className="metrics-setup">
       <div className="left">
-        <h3>Metrics</h3>
+        <h3 className="section-title">Existing Metrics</h3>
         {metrics.map((metric) => (
-          <button
-            key={metric.id}
-            data-equation={metric.equation} // Equation as a data attribute
-          >
-            {metric.name}
-          </button>
+          <div key={metric.id}>
+            <b>{metric.name}</b> = {metric.equation}
+          </div>
         ))}
       </div>
       <div className="center">
+        <h3 className="section-title">Create new Metric</h3>
         <input
+          type="text"
+          placeholder="New metric name"
+          value={newMetricName}
+          onChange={(e) => setNewMetricName(e.target.value)}
+        />
+        {/* <input
+          type="text"
+          placeholder="New metric description"
+          value={newMetricDescription}
+          onChange={(e) => setNewMetricDescription(e.target.value)}
+        /> */}
+        <div className="seperator" />
+        <input
+          className="equation-input"
           type="text"
           value={equation}
           onChange={(e) => setEquation(e.target.value)}
@@ -130,28 +142,20 @@ const MetricsSetup = () => {
           <button onClick={() => handleButtonClicked(")")}>)</button>
           <button onClick={() => handleButtonClicked("^")}>^</button>
         </div>
-        <input
-          type="text"
-          placeholder="New metric name"
-          value={newMetricName}
-          onChange={(e) => setNewMetricName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="New metric description"
-          value={newMetricDescription}
-          onChange={(e) => setNewMetricDescription(e.target.value)}
-        />
-        <button onClick={handleCreation}>Create Metric</button>
+
+        <div className="seperator" />
+        <button className="create-button" onClick={handleCreation}>
+          Create Metric
+        </button>
       </div>
       <div className="right">
-        <h3>Indicators</h3>
+        <h3 className="section-title">Available Indicators</h3>
         {indicators.map((indicator) => (
           <button
             key={indicator.id}
             onClick={() => handleButtonClicked(indicator.symbol)}
           >
-            {indicator.name} - {indicator.symbol}
+            <b>{indicator.name}</b> - {indicator.symbol}
           </button>
         ))}
       </div>
