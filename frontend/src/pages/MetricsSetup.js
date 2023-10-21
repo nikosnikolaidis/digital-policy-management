@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./css/MetricsSetup.css"; // Import your CSS file for styling
 
 const MetricsSetup = () => {
@@ -11,6 +11,10 @@ const MetricsSetup = () => {
   const [indicators, setIndicators] = useState([
     // Your indicators data here
   ]);
+
+  // const [data, setData] = useState([]);
+  // const [indicatorNames, setIndicatorNames] = useState([]);
+  // const [apiResponses, setApiResponses] = useState([]);
 
   const handleButtonClicked = (text) => {
     // Function to handle button clicks and update the equation
@@ -27,12 +31,86 @@ const MetricsSetup = () => {
     setNewMetricDescription("");
   };
 
+  useEffect(() => {
+    const fetchIndicatorData = async () => {
+      try {
+        const myHeaders = new Headers();
+        myHeaders.append(
+          "Authorization",
+          "Bearer " + localStorage.getItem("accessToken")
+        );
+
+        const requestOptions = {
+          method: "GET",
+          headers: myHeaders,
+          redirect: "follow",
+        };
+
+        // Step 1: Make an initial API call to fetch the JSON table
+        const response = await fetch(
+          process.env.REACT_APP_API_URL + `/indicator/all`,
+          requestOptions
+        );
+        const result = await response.json();
+
+        if (Array.isArray(result) && result.length > 0) {
+          // const indicatorNames = result.map((item) => item.name);
+          // setIndicatorNames(indicatorNames);
+          setIndicators(result);
+        } else {
+          console.log("API response is empty or not an array:", result);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    const fetchMetricData = async () => {
+      try {
+        const myHeaders = new Headers();
+        myHeaders.append(
+          "Authorization",
+          "Bearer " + localStorage.getItem("accessToken")
+        );
+
+        const requestOptions = {
+          method: "GET",
+          headers: myHeaders,
+          redirect: "follow",
+        };
+
+        // Step 1: Make an initial API call to fetch the JSON table
+        const response = await fetch(
+          process.env.REACT_APP_API_URL + "/metric/all",
+          requestOptions
+        );
+        const result = await response.json();
+
+        if (Array.isArray(result) && result.length > 0) {
+          setMetrics(result);
+        } else {
+          console.log("API response is empty or not an array:", result);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchIndicatorData();
+    fetchMetricData();
+  }, []); // Empty dependency array to run once on component mount
+
   return (
     <div className="metrics-setup">
       <div className="left">
         <h3>Metrics</h3>
         {metrics.map((metric) => (
-          <button key={metric.id}>{metric.name}</button>
+          <button
+            key={metric.id}
+            data-equation={metric.equation} // Equation as a data attribute
+          >
+            {metric.name}
+          </button>
         ))}
       </div>
       <div className="center">
@@ -71,9 +149,9 @@ const MetricsSetup = () => {
         {indicators.map((indicator) => (
           <button
             key={indicator.id}
-            onClick={() => handleButtonClicked(indicator.name)}
+            onClick={() => handleButtonClicked(indicator.symbol)}
           >
-            {indicator.name}
+            {indicator.name} - {indicator.symbol}
           </button>
         ))}
       </div>
