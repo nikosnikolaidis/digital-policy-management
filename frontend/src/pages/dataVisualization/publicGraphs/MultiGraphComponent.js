@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 
 import "./css/MultiGraphComponent.css";
 import {
@@ -13,9 +12,8 @@ import {
 } from "recharts";
 
 const MultiGraphComponent = ({ tables }) => {
-
   return (
-    <div className={`multi-graph-container`}>
+    <div className={"multi-graph-container main_container"}>
       {tables.map((table, index) => (
         <div key={index} className="graph-container">
           <h3 className="graph-title">Graph {index + 1}</h3>

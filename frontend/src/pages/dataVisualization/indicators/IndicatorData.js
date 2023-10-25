@@ -8,7 +8,7 @@ const IndicatorData = ({ data }) => {
       <ul>
         {data.map((item) => (
           <li key={item.id}>
-            Date: {item.date}, Value: {item.value}
+            Date: {new Date(item.date).toDateString()}, Value: {item.value}
             {/* <button onClick={() => onDeleteItem(item.id)}>Delete</button> */}
           </li>
         ))}

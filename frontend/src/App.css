@@ -16,6 +16,10 @@
   }
 }
 
+.main_container {
+  height: 90vh; /* Set the component height to 100% of the viewport height */
+}
+
 .logInContainer{
   display: flex;
   flex-direction: column;
@@ -88,7 +92,8 @@ button:hover{
 }
 
 .appContainer{
-  min-height: 90vh;
+  min-height: 90vh!;
+  max-height: 90vh!;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -113,14 +118,16 @@ button:hover{
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  /* background-color: #282c34; */
+  background-color: #e0eafd;
+  min-height: 90vh;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: calc(10px + 1vmin);
+  color: rgb(0, 0, 0);
 }
 
 .App-link {

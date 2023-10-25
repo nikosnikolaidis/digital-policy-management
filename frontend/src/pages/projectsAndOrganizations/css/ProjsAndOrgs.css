@@ -1,0 +1,101 @@
+
+/* Container for the entire component */
+.projs-and-orgs {
+  display: flex;
+}
+  
+  /* Left area for projects (adjust as needed) */
+.projects.contracted {
+  flex: 0 0 65%;
+  padding: 20px;
+  background-color: #f0f0f0;
+  overflow: auto; /* Enable scrolling if content overflows */
+}
+  
+.projects.expanded {
+  flex: 0 0 98%; 
+  padding: 20px;
+  background-color: #f0f0f0;
+  overflow: auto; /* Enable scrolling if content overflows */
+}
+
+.separator {
+  border-style:dotted;
+  flex: 0 0 2%; 
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  background-color: beige;
+  overflow: auto; /* Enable scrolling if content overflows */
+  cursor:pointer;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* .arrow {
+  cursor:pointer;
+  text-align: center;
+  vertical-align: middle;
+  position: relative; 
+  top: -50%
+} */
+
+.organizations.open {
+  flex: 0 0 33%; 
+}
+
+/* Adjust the separator button position when closed */
+.organizations.closed {
+  flex: 0 0 0; /* Default width: 2/3 of the total width */
+}
+
+
+
+
+
+
+
+
+/* Styling for the header with the toggle button */
+.organizations-header {
+  display: flex;
+  align-items: center;
+  background-color: #333; /* Example background color */
+  color: #fff; /* Example text color */
+  padding: 10px;
+}
+  
+    /* Styling for the toggle button */
+/* .toggle-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  margin-right: 10px;
+  outline: none;
+  color: #fff;
+} */
+  
+    /* Styling for the title */
+h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+/* Styling for the content (adjust as needed) */
+.organizations-content {
+  padding: 20px;
+  background-color: #f0f0f0; /* Example background color */
+  overflow: auto; /* Enable scrolling if content overflows */
+}
+
+.organizations {
+  /* flex-grow: 1;
+  max-width: 33.333%;
+  transition: max-width 0.3s ease; */
+
+  max-width: 33.333%; /* Maximum width when collapsed */
+  transition: max-width 0.3s ease; /* Add a smooth transition effect */
+  overflow: hidden; /* Hide the content when collapsed */
+}

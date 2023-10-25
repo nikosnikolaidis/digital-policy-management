@@ -1,0 +1,52 @@
+.organizations-main {
+    font-family: Arial, sans-serif;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .InfoTab {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure it takes 100% of the parent's height */
+  }
+  
+  .tab-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .tab:hover {
+    background-color: #ddd;
+  }
+  
+  .tab.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .tab-content {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+  }
+  
+  /* Style individual tab content */
+  .tab-content h2 {
+    margin-top: 0;
+  }
+
+  .half_comp {
+    max-height: 50%;
+  }
+  

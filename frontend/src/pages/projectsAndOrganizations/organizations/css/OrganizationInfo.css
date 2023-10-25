@@ -1,0 +1,27 @@
+
+.organization-info {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .organization-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .organization-info p {
+    margin: 10px 0;
+  }
+  
+  .organization-info a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .organization-info a:hover {
+    text-decoration: underline;
+  }

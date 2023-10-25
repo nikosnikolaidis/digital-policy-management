@@ -1,23 +1,27 @@
-import logo from '../logo.svg';
-import '../App.css';
+import stg_logo from "../logos/ΜΣΣ logo 2 (EL).png";
+import "../App.css";
 
 const Home = () => {
-    return (
-        <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-            Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-            Learn React
-            </a>
-        </header>
-    );
+  return (
+    <header className="App-header">
+      <img src={stg_logo} alt="logo" />
+      {/* <img src={logo} className="App-logo" alt="logo" /> */}
+      <p className="description">
+        Το πληροφοριακό σύστημα της Μονάδας Στρατηγικού Σχεδιασμού του
+        Πανεπιστημίου Μακεδονίας έχει ως κύρια λειτουργία του την αποτύπωση,
+        διαχείριση και παρακολούθηση του στρατηγικού σχεδίου, των
+        επιχειρησιακών/αναπτυξιακών σχεδίων, της προγραμματικής συμφωνίας και
+        των σχεδίων δράσης, καθώς και, την παρακολούθηση δεικτών επιδόσεων
+        (KPIs). Στο πληροφοριακό σύστημα καταγράφονται στοιχεία που αφορούν τις
+        ακαδημαϊκές μονάδες του Ιδρύματος, τις υποδομές, τις διοικητικές
+        υπηρεσίες, την ερευνητική δραστηριότητα κ.λπ. Κατά τον σχεδιασμό του
+        πληροφοριακού συστήματος καθώς και κατά την διάρκεια λειτουργιάς του
+        ιδιαίτερη έμφαση έχει δοθεί στην τήρηση των διατάξεων και νομοθεσιών για
+        την προστασία προσωπικών δεδομένων καθώς και στην ασφάλεια και έλεγχο
+        πρόσβασης των αποθηκευμένων πληροφοριών και εγγράφων.
+      </p>
+    </header>
+  );
 };
-  
+
 export default Home;

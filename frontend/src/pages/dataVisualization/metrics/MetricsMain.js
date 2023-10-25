@@ -37,8 +37,6 @@ const MetricsMain = ({}) => {
   const [metricNames, setMetricNames] = useState([]);
   const [apiResponses, setApiResponses] = useState([]);
 
-  var test = "xxx";
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -56,7 +54,7 @@ const MetricsMain = ({}) => {
 
         // Step 1: Make an initial API call to fetch the JSON table
         const response = await fetch(
-          process.env.REACT_APP_API_URL+'/metric/all',
+          process.env.REACT_APP_API_URL + "/metric/all",
           requestOptions
         );
         const result = await response.json();
@@ -68,7 +66,8 @@ const MetricsMain = ({}) => {
           // Step 2: Iterate through the JSON table and make API calls
           const apiPromises = metricNames.map(async (metricName) => {
             const apiResponse = await fetch(
-              process.env.REACT_APP_API_URL+`/report/metric?metricName=${metricName}`,
+              process.env.REACT_APP_API_URL +
+                `/report/metric?metricName=${metricName}`,
               requestOptions
             );
             return apiResponse.json();
@@ -102,7 +101,7 @@ const MetricsMain = ({}) => {
   };
 
   return (
-    <div className="Metric">
+    <div className="Metric main_container">
       {data.map((metric_component) => (
         <div className={"metric_component_panel"}>
           <div

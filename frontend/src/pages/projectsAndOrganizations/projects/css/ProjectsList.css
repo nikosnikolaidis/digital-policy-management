@@ -1,0 +1,70 @@
+.projects-main {
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    /* max-height: 400px; */
+    overflow-y: auto; /* Enable vertical scroll if content overflows */
+    
+    height: 90vh; /* Set the height of projects-main to fill the screen */
+    display: flex; /* Use flexbox to arrange children */
+    flex-direction: column; /* Arrange children vertically */
+  
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 70%;
+  }
+  
+  select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 25%;
+  }
+  
+  .projects-list {
+    /* display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between; */
+
+    flex: 1; /* Allow projects-list to grow and fill remaining space */
+  overflow-y: auto; /* Add a vertical scrollbar when needed */
+
+  }
+  
+  /* Style individual Project components (customize as needed) */
+  .project {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #fff;
+  }
+  
+  /* Highlight the matched text */
+  .highlight {
+    background-color: yellow;
+  }
+
+.filtered-count-label {
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  background-color: #007bff; /* Background color of the label */
+  color: #fff; /* Text color of the label */
+  padding: 5px 10px; /* Padding around the label text */
+  font-weight: bold; /* Bold text */
+  border-radius: 5px; /* Rounded corners */
+}
