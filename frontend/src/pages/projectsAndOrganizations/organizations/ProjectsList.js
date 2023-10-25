@@ -18,6 +18,10 @@ const ProjectsList = ({ projectsData }) => {
 
   // Function to filter projects based on search input and selected field
   const filterProjects = () => {
+    if (!Array.isArray(projectsData)) {
+      return [];
+    }
+
     const filtered = projectsData.filter((project) => {
       if (searchField === "all") {
         return Object.values(project).some((value) =>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Indicator from "./Indicator"; // Import the Indicator component
 import "./css/IndicatorsMain.css";
 
@@ -29,6 +30,36 @@ const IndicatorsMain = () => {
   const [data, setData] = useState([]);
   const [indicatorNames, setIndicatorNames] = useState([]);
   const [apiResponses, setApiResponses] = useState([]);
+  const [newIndicatorName, setNewIndicatorName] = useState("");
+  const [newIndicatorSymbol, setNewIndicatorSymbol] = useState("");
+
+  const createIndicator = () => {
+    const apiUrl = `${process.env.REACT_APP_API_URL}/indicator`;
+
+    const data = {
+      name: newIndicatorName,
+      symbol: newIndicatorSymbol,
+    };
+
+    const config = {
+      method: "post",
+      url: apiUrl,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        window.location.reload();
+      })
+      .catch(function (error) {
+        console.log("Error:", error);
+      });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -93,6 +124,22 @@ const IndicatorsMain = () => {
 
   return (
     <div className="Indicator main_container">
+      <div className="new-indicator-section">
+        <input
+          type="text"
+          placeholder="Indicator Name"
+          value={newIndicatorName}
+          onChange={(e) => setNewIndicatorName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Indicator Symbol"
+          value={newIndicatorSymbol}
+          onChange={(e) => setNewIndicatorSymbol(e.target.value)}
+        />
+        <button onClick={createIndicator}>Create New Indicator</button>
+      </div>
+
       {data.map((indicator_component) => (
         <div className={"indicator_component_panel"}>
           <div
