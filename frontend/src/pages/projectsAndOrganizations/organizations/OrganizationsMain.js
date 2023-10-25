@@ -168,40 +168,43 @@ const OrganizationsMain = () => {
         <div
           className={`tab ${activeTab === "info" ? "active" : ""}`}
           onClick={() => handleTabClick("info")}
+          disabled={!organizationData}
         >
           Info
         </div>
         <div
           className={`tab ${activeTab === "coordinated" ? "active" : ""}`}
           onClick={() => handleTabClick("coordinated")}
+          disabled={!coordinationData}
         >
           Coordinated
         </div>
         <div
           className={`tab ${activeTab === "participated" ? "active" : ""}`}
           onClick={() => handleTabClick("participated")}
+          disabled={!participationData}
         >
           Participated
         </div>
       </div>
 
       <div className="tab-content">
-        {activeTab === "info" && (
+        {activeTab === "info" && organizationData ? (
           <div className="InfoTab">
             <OrganizationInfo organizationData={organizationData} />
             <ColaboratedPartners data={collaboratorsData} />
           </div>
-        )}
-        {activeTab === "coordinated" && (
+        ) : null}
+        {activeTab === "coordinated" && coordinationData ? (
           <div>
             <Coordinated projectsData={participationData} />
           </div>
-        )}
-        {activeTab === "participated" && (
+        ) : null}
+        {activeTab === "participated" && participationData ? (
           <div>
             <Participated projectsData={coordinationData} />
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );

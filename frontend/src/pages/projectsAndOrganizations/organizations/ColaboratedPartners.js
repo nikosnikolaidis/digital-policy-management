@@ -10,7 +10,7 @@ const ColaboratedPartners = ({ data }) => {
       <div className="partners">
         {partnersArray.map(([orgInfo, value], index) => (
           <div key={index} className="partner-item">
-            {value} with {orgInfo.match(/name='(.*?)'/)[1]}
+            {value} projects with {orgInfo.match(/name='(.*?)'/)[1]}
           </div>
         ))}
       </div>

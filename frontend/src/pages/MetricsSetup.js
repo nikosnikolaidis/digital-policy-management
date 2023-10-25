@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import "./css/MetricsSetup.css"; // Import your CSS file for styling
 
 const MetricsSetup = () => {
@@ -12,23 +14,38 @@ const MetricsSetup = () => {
     // Your indicators data here
   ]);
 
-  // const [data, setData] = useState([]);
-  // const [indicatorNames, setIndicatorNames] = useState([]);
-  // const [apiResponses, setApiResponses] = useState([]);
-
   const handleButtonClicked = (text) => {
     // Function to handle button clicks and update the equation
     setEquation((prevEquation) => prevEquation + " " + text);
   };
 
-  const handleCreation = () => {
-    // Function to create a new metric with the entered name and description
-    // You can add your logic to create a metric here
-    console.log("Creating metric with name:", newMetricName);
-    console.log("Description:", newMetricDescription);
-    // Reset the inputs
-    setNewMetricName("");
-    setNewMetricDescription("");
+  const handleCreation = async () => {
+    const myHeaders = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    };
+
+    const requestData = {
+      name: newMetricName,
+      equation: equation,
+    };
+
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/metric`,
+        requestData,
+        {
+          headers: myHeaders,
+        }
+      );
+
+      console.log(response.data);
+
+      // Refresh the page after the request succeeds
+      window.location.reload();
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   useEffect(() => {

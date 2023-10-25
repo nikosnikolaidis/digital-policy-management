@@ -11,6 +11,11 @@ import {
 } from "recharts";
 
 const MetricsGraph = ({ data }) => {
+  if (!data || data.length === 0) {
+    // Handle the case when data is empty or undefined
+    return <div className="metrics-graph">No data available</div>;
+  }
+
   return (
     <div className="metrics-graph">
       {/* <h2>{data.length > 0 && data[0].metric.name}</h2> */}

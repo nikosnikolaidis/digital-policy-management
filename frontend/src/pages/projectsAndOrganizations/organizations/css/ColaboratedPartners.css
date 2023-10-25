@@ -1,21 +1,20 @@
-
 .colaborated-partners {
-    background-color: #f0f0f0;
-    border-radius: 5px;
-    text-align: center;
-  }
-  
-  .colaborated-partners h2 {
-    font-size: 24px;
-  }
-  
-  .partner-item {
-    font-size: 16px;
-    margin: 5px 10px;
-  }
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  text-align: center;
+  height: 300px; /* Set an explicit height */
+}
 
-  .partners {
-    /* flex: 1; */
-    max-height: 50%;
-    overflow-y: auto; /* Add a vertical scrollbar when needed */
-  }
+.colaborated-partners h2 {
+  font-size: 24px;
+}
+
+.partner-item {
+  font-size: 16px;
+  margin: 5px 10px;
+}
+
+.partners {
+  max-height: 80%; /* Adjust max-height as needed */
+  overflow-y: auto;
+}

@@ -63,20 +63,20 @@ const Layout = () => {
             </Link> */}
             {valid && (
               <>
-                <Link to="/workflows" className="navbar-item">
-                  Workflows
-                </Link>
-                <Link to="/metrics-setup" className="navbar-item">
-                  Metrics Setup
-                </Link>
-                <Link to="/projects" className="navbar-item">
-                  Projects
-                </Link>
                 <Link to="/indicators" className="navbar-item">
                   Διαχείριση Δεικτών
                 </Link>
                 <Link to="/metrics" className="navbar-item">
                   Διαχείριση Μετρικών
+                </Link>
+                <Link to="/metrics-setup" className="navbar-item">
+                  Δημιουργία Μετρικής
+                </Link>
+                <Link to="/workflows" className="navbar-item">
+                  Διαγράμματα BPMN
+                </Link>
+                <Link to="/projects" className="navbar-item">
+                  Ευρωπαϊκά Έργα
                 </Link>
                 <Link to="/users" className="navbar-item">
                   Διαχείριση Χρηστών
@@ -104,7 +104,7 @@ const Layout = () => {
               <div className="buttons">
                 {!valid && (
                   <Link to="/login">
-                    <button className="button is-light">Log in</button>
+                    <button className="button is-light">Σύνδεση</button>
                   </Link>
                 )}
                 {valid && (
@@ -112,7 +112,7 @@ const Layout = () => {
                     className="button is-primary"
                     onClick={() => logout()}
                   >
-                    Log out
+                    Αποσύνδεση
                   </button>
                 )}
               </div>
