@@ -37,4 +37,11 @@ public class UserPrivilegedService {
         user.setRoles(roles+",PRIVILEGED");
         return user;
     }
+
+    public void deleteUser(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "User with email "+ email +" doesn't exist!"
+        ));
+        userRepository.delete(user);
+    }
 }

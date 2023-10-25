@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface OrganizationRepository extends JpaRepository<Organization,Long> {
     Optional<Organization> findByAcronym(String acronym);
-    //Optional<Organization> findByName(String name);
     Optional<Organization> findByName(String name);
+    Optional<Organization> findByNameIgnoreCase(String name);
 }
