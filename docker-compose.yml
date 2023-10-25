@@ -27,6 +27,13 @@ services:
     ports:
       - '5455:5432'
 
+  frontend-strategic:
+    build:
+      context: ./frontend/.
+    container_name: frontend-strategic
+    ports:
+      - '3002:3000'
+
   jbpm-strategic:
     image: nikosnikolaidis/jbpm-allowframes:7.61.0.Final
     container_name: jbpm-strategic
