@@ -56,44 +56,30 @@ const Layout = () => {
         <div id="navbar-menu" className="navbar-menu">
           <div className="navbar-start">
             <Link to="/" className="navbar-item">
-              Κεντρική
+              Home
             </Link>
             {/* <Link to="/graphs" className="navbar-item">
               Ταμπλό Δεικτών
             </Link> */}
             {valid && (
               <>
-                <Link to="/indicators" className="navbar-item">
-                  Διαχείριση Δεικτών
-                </Link>
                 <Link to="/metrics" className="navbar-item">
-                  Διαχείριση Μετρικών
+                  Manage Metrics
                 </Link>
-                <Link to="/metrics-setup" className="navbar-item">
-                  Δημιουργία Μετρικής
+                <Link to="/kpis" className="navbar-item">
+                  Manage KPIs
+                </Link>
+                <Link to="/kpis-setup" className="navbar-item">
+                  Create KPIs
                 </Link>
                 <Link to="/workflows" className="navbar-item">
-                  Διαγράμματα BPMN
-                </Link>
-                <Link to="/projects" className="navbar-item">
-                  Ευρωπαϊκά Έργα
-                </Link>
-                <Link to="/users" className="navbar-item">
-                  Διαχείριση Χρηστών
+                  BPMN Diagrams
                 </Link>
 
                 <div
                   className="navbar-item has-dropdown is-hoverable"
                   onClick={onClickMore}
                 >
-                  {/* <a className="navbar-link">More</a>
-
-                  <div className="navbar-dropdown">
-                    <a className="navbar-item">About</a>
-                    <a className="navbar-item">Contact</a>
-                    <hr className="navbar-divider" />
-                    <a className="navbar-item">Report an issue</a>
-                  </div> */}
                 </div>
               </>
             )}
