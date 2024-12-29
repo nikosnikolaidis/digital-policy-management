@@ -6,7 +6,7 @@ const Home = () => {
     <header className="App-header">
       <a className="navbar-item" href="https://www.uom.gr">
             <img
-              src="https://www.uom.gr/site/images/logos/UOMLOGOGR-thumb.png"
+              src="logo.png"
               alt="uom-logo"
               height="400"
             />

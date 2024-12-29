@@ -32,7 +32,7 @@ const Layout = () => {
         <div className="navbar-brand">
           <a className="navbar-item" href="https://www.uom.gr">
             <img
-              src="https://www.uom.gr/site/images/logos/UOMLOGOGR.png"
+              src="logo.png"
               alt="uom-logo"
               width="120"
               height="120"
